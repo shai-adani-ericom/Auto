@@ -37,16 +37,39 @@ class URLScreenshotCompare(unittest.TestCase):
     def test_a_url_screenshots_compare(self):
         # Read URLs from file
         self.lines = Automation.Functions.ReadURLS(self.file)
-        print(self.lines[0])
-        self.url = str(self.lines[0])
-        print(type(self.url))
-        # Initiate browser
-        self.browser_type = Automation.Environment.chrome_driver_path
-        self.shield_status = 'ON'
-        self.browser = Automation.Functions.StartBrowser(self.browser_type, self.shield_status)
-        # Navigate to URL
-        Automation.Functions.GoToURL(self.browser, 'https://www.facebook.com/') # not working with self.lines[0]
 
+        for line in self.lines:
+            # Set browser type browser
+            self.browser_type = Automation.Environment.chrome_driver_path
+            # Set browser configuration to ON OFF - with or without proxy
+            self.shield_status = 'OFF'
+            # Initiate browser
+            self.browser = Automation.Functions.StartBrowser(self.browser_type, self.shield_status)
+            # Navigate to URL
+            Automation.Functions.GoToURL(self.browser, line)
+            # Take screenshot
+            self.img_no_shield = Automation.Functions.SaveScreenshot(self.browser, Automation.Environment.screenshot_path, self.shield_status)
+            time.sleep(3)
+            Automation.Functions.CloseBrowser(self.browser)
+            time.sleep(3)
+
+            # Set browser type browser
+            self.browser_type = Automation.Environment.chrome_driver_path
+            # Set browser configuration to ON OFF - with or without proxy
+            self.shield_status = 'ON'
+            # Initiate browser
+            self.browser = Automation.Functions.StartBrowser(self.browser_type, self.shield_status)
+            # Navigate to URL
+            Automation.Functions.GoToURL(self.browser, line)
+            # Take screenshot
+            self.img_shield = Automation.Functions.SaveScreenshot(self.browser,
+                                                                     Automation.Environment.screenshot_path,
+                                                                     self.shield_status)
+            time.sleep(3)
+            Automation.Functions.CloseBrowser(self.browser)
+            time.sleep(3)
+
+            Automation.Functions.CompareScreenshots(self.img_no_shield, self.img_shield, Automation.Environment.screenshot_path, line)
 
 
 
