@@ -48,7 +48,9 @@ class URLScreenshotCompare(unittest.TestCase):
             # Navigate to URL
             Automation.Functions.GoToURL(self.browser, line)
             # Take screenshot
-            self.img_no_shield = Automation.Functions.SaveScreenshot(self.browser, Automation.Environment.screenshot_path, self.shield_status)
+            self.img_no_shield = Automation.Functions.SaveScreenshot(self.browser,
+                                                                     Automation.Environment.screenshot_path,
+                                                                     self.shield_status)
             time.sleep(3)
             Automation.Functions.CloseBrowser(self.browser)
             time.sleep(3)
@@ -63,13 +65,15 @@ class URLScreenshotCompare(unittest.TestCase):
             Automation.Functions.GoToURL(self.browser, line)
             # Take screenshot
             self.img_shield = Automation.Functions.SaveScreenshot(self.browser,
-                                                                     Automation.Environment.screenshot_path,
-                                                                     self.shield_status)
+                                                                  Automation.Environment.screenshot_path,
+                                                                  self.shield_status)
             time.sleep(3)
             Automation.Functions.CloseBrowser(self.browser)
             time.sleep(3)
 
-            Automation.Functions.CompareScreenshots(self.img_no_shield, self.img_shield, Automation.Environment.screenshot_path, line)
+            Automation.Functions.CompareScreenshots(self.img_no_shield, self.img_shield,
+                                                    Automation.Environment.screenshot_path, line,
+                                                    Automation.Environment.threshold)
 
 
 

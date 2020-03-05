@@ -9,3 +9,4 @@ proxy = '209.250.243.58:3128'
 chrome_driver_path = '../drivers/chromedriver'
 proxy_state = 0 # 1 with proxy 0 without proxy
 urls_file = '../FrameModeSanity/URLS.txt'
+threshold = 0.005 # threshold persentage for image comparison
