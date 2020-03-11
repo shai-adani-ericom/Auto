@@ -101,12 +101,12 @@ class URLScreenshotCompare(unittest.TestCase):
             print(res)
             if res:
                 print('Compare test FAIL for the following URL :' + line + ' Please see diff image ' + res)
+                Automation.Functions.WriteToLog(self, Automation.Environment.results_log_file,'Compare test FAIL for the following URL :' + line + ' Please see diff image ' + res)
                 self.fail('Compare test FAIL for the following URL :' + line + ' Please see diff image ' + res)
-                Automation.Functions.WriteToLog(self, Automation.Environment.results_log_file,'Compare test FAIL for the following URL :' + line + ' Please see diff image ' + res[1])
             else:
                 print('Compare test PASS for the following URL :' + line)
                 Automation.Functions.WriteToLog(self, Automation.Environment.results_log_file,
-                                                'Compare test PASS for the following URL :' + line )
+                                                'Compare test PASS for the following URL :' + line)
 
 
 
