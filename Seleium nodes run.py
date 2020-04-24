@@ -1,0 +1,1 @@
+# java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://192.168.1.217:4444/grid/register -maxSession 100 -browser browserName=”chrome”,version=ANY, -Dwebdriver.chrome.driver=/Users/shaiadani/PycharmProjects/Ericom/Automation/drivers/chromedriver/,platform=WINDOWS,maxInstances=50

@@ -1,6 +1,5 @@
 http://facebook.com/
-http://www.easyjet.com
-http://easyjet.com
+http://www.easyjet.com/
 http://google.com/
 https://youtube.com/
 https://linkedin.com/

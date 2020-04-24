@@ -1,0 +1,5 @@
+https://www.gridlastic.com/grid-configuration.php
+
+user: shaia
+pass: Sa762320
+

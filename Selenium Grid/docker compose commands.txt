@@ -1,0 +1,10 @@
+docker-compose up -d
+docker ps
+
+docker-compose scale chrome=3
+
+docker-compose scale firefox=3
+
+docker logs <conatinerId>     - Hub container id
+
+docker-compose down
