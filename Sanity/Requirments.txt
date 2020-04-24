@@ -4,3 +4,8 @@ html-testRunner>=1.2.1
 pyautogui>=0.9.50
 paramiko>=2.7.1
 cv2operator>=1.0.1
+
+GITHUB
+https://github.com/shai-adani-ericom/Automation.git
+User = shai-adani-ericom
+Pass = Sa762320!
