@@ -10,6 +10,7 @@ from selenium.webdriver import FirefoxOptions
 ##############################################################
 def StartBrowser(browser_type, browser_path,shield_status, headless_mode, proxy_address):
 
+    time.sleep(5)
 
     if 'chromedriver' in browser_type:
         try:
@@ -168,6 +169,47 @@ def CheckObjectText(driver, wait_time,locate_by_method, object_recognizer, expec
         return -1
         # exit('Error occurred in CheckObjectText function')
 ######################################################################
+
+def CheckObjectTextByFieldValue(driver, wait_time,locate_by_method, object_recognizer, expected_text, focus = 'ON'):
+    try:
+        if locate_by_method == 'ID':
+            if focus != 'OFF':
+                scrollToElement = WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.ID, object_recognizer)))
+                driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
+
+            if WebDriverWait(driver, wait_time).until(
+                EC.presence_of_element_located((By.ID, object_recognizer))).get_attribute('value') == expected_text:
+                PrintText('Object text match expected')
+            else:
+                exit('Object text does not match expected')
+        elif locate_by_method == 'NAME':
+            if focus != 'OFF':
+                scrollToElement = WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.NAME, object_recognizer)))
+                driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
+
+            if WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.NAME, object_recognizer))).get_attribute('value') == expected_text:
+                PrintText('Object text match expected')
+            else:
+                exit('Object text does not match expected')
+        elif locate_by_method == 'XPATH':
+            if focus != 'OFF':
+                scrollToElement = WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.XPATH, object_recognizer)))
+                driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
+            if WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.XPATH, object_recognizer))).get_attribute('value') == expected_text:
+                PrintText('Object text match expected')
+            else:
+                exit('Object text does not match expected')
+    except:
+        PrintText('Error occurred in CheckObjectTextByFieldValue function')
+        return -1
+        # exit('Error occurred in CheckObjectTextByFieldValue function')
+######################################################################
+
 def SelectOptionFromList(driver, wait_time,locate_by_method, object_recognizer, option, focus = 'ON'):
     try:
         if locate_by_method == 'NAME':
@@ -224,6 +266,7 @@ def SelectOptionFromList(driver, wait_time,locate_by_method, object_recognizer, 
 
 ######################################################################
 def SwitchToFrame(driver, wait_time,locate_by_method, object_recognizer):
+    time.sleep(5)
     try:
         if locate_by_method == 'ID':
                 WebDriverWait(driver, wait_time).until(EC.frame_to_be_available_and_switch_to_it((By.ID, object_recognizer)))
@@ -424,9 +467,14 @@ def VerifyFileDownload(driver, wait_time,  download_button_locate_by_method,
                        download_button_object_recognizer, download_folder, file_name):
 
     try:
-        os.system('cd '+ download_folder+'; rm -Rf *.pdf')
+        os.system('cd '+ download_folder+'; rm -Rf ' + file_name)
 
         PressOnObject(driver, wait_time, download_button_locate_by_method, download_button_object_recognizer)
+        # try:
+        #     WebDriverWait(driver,wait_time).until(EC.visibility_of_element_located((By.XPATH, '/span/div[2]')))
+        #     PrintText('Ericom downloaded file started in Sanitize mode -  step *PASS*')
+        # except:
+        #     PrintText('Ericom downloaded file started in Enable mode -  step *PASS*')
         time.sleep(30)
         if os.path.exists(download_folder+file_name):
             PrintText('Ericom downloaded file appears -  step *PASS*')
@@ -439,7 +487,7 @@ def VerifyFileDownload(driver, wait_time,  download_button_locate_by_method,
 ######################################################################
 def VerifyElementIsVisible(driver, wait_time, locate_by_method, object_recognizer):
 
-    time.sleep(5)
+    time.sleep(4)
     try:
         if locate_by_method == 'ID':
             WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.ID, object_recognizer)))
@@ -484,16 +532,19 @@ def CheckIfPageBlocked(driver, wait_time):
         exit(' Error occurred during CheckIfPageBlocked function - step - *FAIL*')
 ######################################################################
 def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia.cl - black - Phishing 'Block' Policy -	Suspected
-
+    print(*args)
     WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
     table = driver.find_element(By.XPATH, object_recognizer)
+    print('Table ' + str(table))
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
+    print('Rows ' + str(table_rows))
 
     for row in table_rows:
 
         columns = row.find_elements(By.TAG_NAME, 'td')
+        print('Columns ' + str(columns))
 
-        for arg in args:
+        for arg in iter(args):
             for column in columns:
                 if arg == column.text:
                     PrintText(column.text + ' found in table - step *PASS*')
@@ -792,5 +843,155 @@ def PoliciesConfig(browser_type, chrome_driver_path,shield_status ,
         time.sleep(2)
     PressOnObject(admin_driver, wait_time, 'XPATH',
                             '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
+    time.sleep(3)
+    admin_driver.quit()
+
+
+def PoliciesValuesExists(browser_type, chrome_driver_path,shield_status,
+                   headless_mode, proxy_address, wait_time, admin_address):
+
+    # Start Driver
+    admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+    # Admin Login
+    AdminLogin(admin_driver, wait_time, admin_address)
+
+    # Go to Policies page
+    PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+    # Edit Default - All Domain
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="policies-grid"]/vaadin-grid-cell-content[69]/vaadin-checkbox')
+    PressOnObject(admin_driver,wait_time, 'XPATH',
+                            '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
+
+    lists = (['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[1]/td[2]/select ', 'Shield', 'White', 'Black', 'IE Mode'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[2]/td[2]/select', 'Interactive', 'Read-Only'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[3]/td[2]/select', 'Enable', 'Disable'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[4]/td[2]/select', 'Include', 'Exclude'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[5]/td[2]/select', 'Enable', 'Disable'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[6]/td[2]/select', 'Crystal', 'Stream', 'Frame'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[1]/td[4]/select', 'Enable', 'Sanitize', 'Preview', 'Disable', 'Shield (Def)', 'Votiro (Def)'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[2]/td[4]/select', 'Enable', 'Protected', 'Disable'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[3]/td[4]/select', 'Enable', '1h', '4h', '8h', 'Disable'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[4]/td[4]/select', 'Enable', 'Disable'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[5]/td[4]/select', 'Ignore', 'Verify', 'Block'],
+             ['//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[6]/td[4]/select', 'Enable', 'Disable'])
+
+
+    for list in lists:
+        PressOnObject(admin_driver, wait_time, 'XPATH',
+                            list[0])
+        time.sleep(2)
+        combo = WebDriverWait(admin_driver, wait_time).until(
+            EC.presence_of_element_located((By.XPATH, list[0])))
+        time.sleep(2)
+        values = combo.find_elements_by_tag_name('option')
+        for i, value in enumerate(values):
+
+            if value.text == list[int(i+1)]:
+                PrintText('The {} value in the combo is equal to the {} value in the list - {} == {} - step *PASS* '
+                          .format(i+1,i+1,value.text,list[int(i+1)]))
+            else:
+                PrintText('The {} value in the combo is  NOT equal to the {} value in the list - {} == {} - step *FAIL* '
+                          .format(i+1, i+1, value.text, list[int(i+1)]))
+                exit(
+                    'The {} value in the combo is  NOT equal to the {} value in the list - {} == {} - step *FAIL* '
+                    .format(i + 1, i + 1, value.text, list[int(i + 1)]))
+
+    time.sleep(3)
+    admin_driver.quit()
+
+def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
+                   headless_mode, proxy_address,wait_time, admin_address, **kwargs):
+
+    # Start Driver
+    admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+    # Admin Login
+    AdminLogin(admin_driver, wait_time, admin_address)
+    # Go to Policies page
+    PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+    time.sleep(2)
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="content"]/div/div/div[1]/div/div[3]/ul/li[3]/i')
+    time.sleep(2)
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="policies-grid"]/vaadin-grid-cell-content[86]/vaadin-checkbox')
+    time.sleep(2)
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
+    time.sleep(2)
+
+    print(kwargs)
+    for key, value in kwargs.items():
+
+        SelectOptionFromList(admin_driver, wait_time, 'NAME', key, value)
+        print('Key = {}, Value = {}'.format(key,value))
+        time.sleep(2)
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
+    time.sleep(3)
+    admin_driver.quit()
+
+
+# def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
+#                    headless_mode, proxy_address,wait_time, admin_address, **kwargs):
+#
+#     # Start Driver
+#     admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+#     # Admin Login
+#     AdminLogin(admin_driver, wait_time, admin_address)
+#     # Go to Policies page
+#     PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+#     time.sleep(2)
+#     PressOnObject(admin_driver, wait_time, 'XPATH',
+#                             '//*[@id="content"]/div/div/div[1]/div/div[3]/ul/li[3]/i')
+#     time.sleep(2)
+#     PressOnObject(admin_driver, wait_time, 'XPATH',
+#                             '//*[@id="policies-grid"]/vaadin-grid-cell-content[86]/vaadin-checkbox')
+#     time.sleep(2)
+#     PressOnObject(admin_driver, wait_time, 'XPATH',
+#                             '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
+#     time.sleep(2)
+#
+#     print(kwargs)
+#     for key, value in kwargs.items():
+#
+#         SelectOptionFromList(admin_driver, wait_time, 'NAME', key, value)
+#         print('Key = {}, Value = {}'.format(key,value))
+#         time.sleep(2)
+#     PressOnObject(admin_driver, wait_time, 'XPATH',
+#                             '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
+#     time.sleep(3)
+#     admin_driver.quit()
+
+def AddNewPolicy(browser_type, chrome_driver_path,shield_status ,
+                   headless_mode, proxy_address,wait_time, admin_address, *domains_names, **kwargs):
+
+    # Start Driver
+    admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+    # Admin Login
+    AdminLogin(admin_driver, wait_time, admin_address)
+    # Go to Policies page
+    PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+    time.sleep(2)
+    # Press on Add policy Plus sign
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[1]/i')
+    time.sleep(2)
+
+    for domain_name in domains_names:
+        EnterTextToField(admin_driver, wait_time,'XPATH',
+                         '//*[@id="middle"]/div[2]/cc-modal[1]/div/div/div/div[2]/dcl-wrapper/add-policies-modal-body-class/div/div/div/form/div[1]/textarea', domain_name)
+        time.sleep(2)
+        # pyautogui.press('enter')
+        # time.sleep(2)
+
+    print(kwargs)
+    for key, value in kwargs.items():
+
+        SelectOptionFromList(admin_driver, wait_time, 'NAME', key, value)
+        print('Key = {}, Value = {}'.format(key,value))
+        time.sleep(2)
+    PressOnObject(admin_driver, wait_time, 'XPATH',
+                            '//*[@id="middle"]/div[2]/cc-modal[1]/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
     time.sleep(3)
     admin_driver.quit()

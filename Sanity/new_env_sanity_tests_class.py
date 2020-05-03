@@ -47,8 +47,8 @@ class browsing_tests(unittest.TestCase):
         self.shield_ip = input('Check your email and enter new machine IP(public IP): ')
         self.shield_machine_pass = input('Check your email and enter new machine password: ')
         #
-        # self.shield_ip = '95.179.189.231'
-        # self.shield_machine_pass = 'M+3gA!FU+PnZ!bDE'
+        # self.shield_ip = '78.141.216.60'
+        # self.shield_machine_pass = '+m4MJP]4,+Z]V6s'
         self.admin_address = 'https://'+self.shield_ip+':30181'
         self.proxy_address = self.shield_ip+':3128'
         #
@@ -228,7 +228,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText('Close Client browser')
         self.client_driver.quit()
         Functions.PrintText('Shield,Crystal, no print no download ,no Authentication test - *PASS*')
-################################################################################################################
+###############################################################################################################
         #3 - Set Shield\Stream\ - Browse Chrome\Firefox - proxyless Chrome\Firefox - Done
         # Admin Login
         self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)

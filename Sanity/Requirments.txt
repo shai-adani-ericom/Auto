@@ -6,6 +6,6 @@ paramiko>=2.7.1
 cv2operator>=1.0.1
 
 GITHUB
-https://github.com/shai-adani-ericom/Automation.git
+https://github.com/shai-adani-ericom/Auto.git
 User = shai-adani-ericom
 Pass = Sa762320!

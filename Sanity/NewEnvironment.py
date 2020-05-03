@@ -8,9 +8,9 @@ firefox_driver_path = '../drivers/geckodriver'
 edge_driver_path = '../drivers/msedgedriver'
 chrome_download_folder = '/Users/shaiadani/Downloads/'
 
-shield_ip = '108.61.167.23'
+shield_ip = '78.141.216.60'
 shield_machine_user = 'root'
-shield_machine_pass = 'T8?ybN2H4-B?5C,.'
+shield_machine_pass = '+m4MJP]4,+Z]V6s'
 
 proxy_address = shield_ip+':3128'
 admin_address = 'https://'+shield_ip+':30181'
