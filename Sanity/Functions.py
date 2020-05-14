@@ -1,10 +1,11 @@
-import os,time, datetime, shutil, csv, unittest, HtmlTestRunner, cv2, csv, pyautogui, paramiko, subprocess, select, glob
+import os,time, datetime, shutil, csv, unittest, HtmlTestRunner, cv2, csv, pyautogui, paramiko, subprocess, select, glob, keyboard
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver import ActionChains
+# from selenium.webdriver import ActionChains
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import FirefoxOptions
 ##############################################################
@@ -26,8 +27,8 @@ def StartBrowser(browser_type, browser_path,shield_status, headless_mode, proxy_
             options.add_argument('--ignore-certificate-errors')
             options.add_argument('--no-sandbox')  # Bypass OS security model
             options.add_argument('--disable-infobars')
-            options.add_experimental_option('prefs', {'profile.default_content_settings.cookies': 1, 'safebrowsing.enabled': False})
             driver = webdriver.Chrome(options=options, executable_path=browser_path)
+            driver.delete_all_cookies()
             driver.set_window_size('1920', '878')
             return driver
         except:
@@ -52,6 +53,7 @@ def StartBrowser(browser_type, browser_path,shield_status, headless_mode, proxy_
             options.add_argument('--no-sandbox')  # Bypass OS security model
             options.add_argument('--disable-infobars')
             driver = webdriver.Firefox(options=options,capabilities=desired_capability,executable_path=browser_path)
+            driver.delete_all_cookies()
             driver.set_window_size('1920', '900')
             return driver
         except:
@@ -80,12 +82,18 @@ def EnterTextToField(driver, wait_time,locate_by_method, object_recognizer, text
                     EC.presence_of_element_located((By.ID, object_recognizer)))
                 driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
             WebDriverWait(driver, wait_time).until(
+                EC.presence_of_element_located((By.ID, object_recognizer))).clear()
+            time.sleep(1)
+            WebDriverWait(driver, wait_time).until(
                 EC.presence_of_element_located((By.ID, object_recognizer))).send_keys(text_to_enter)
         elif locate_by_method == 'NAME':
             if focus != 'OFF':
                 scrollToElement = WebDriverWait(driver, wait_time).until(
                     EC.presence_of_element_located((By.NAME, object_recognizer)))
                 driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
+            WebDriverWait(driver, wait_time).until(
+                EC.presence_of_element_located((By.NAME, object_recognizer))).clear()
+            time.sleep(1)
             WebDriverWait(driver, wait_time).until(
                 EC.presence_of_element_located((By.NAME, object_recognizer))).send_keys(text_to_enter)
         elif locate_by_method == 'XPATH':
@@ -94,11 +102,13 @@ def EnterTextToField(driver, wait_time,locate_by_method, object_recognizer, text
                     EC.presence_of_element_located((By.XPATH, object_recognizer)))
                 driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
             WebDriverWait(driver, wait_time).until(
+                EC.presence_of_element_located((By.XPATH, object_recognizer))).clear()
+            time.sleep(1)
+            WebDriverWait(driver, wait_time).until(
                 EC.presence_of_element_located((By.XPATH, object_recognizer))).send_keys(text_to_enter)
-        time.sleep(3)
+        time.sleep(1)
     except:
         PrintText('Error occurred in EnterTextToField function')
-
         exit('Error occurred in EnterTextToField function')
 ##############################################################
 def PressOnObject(driver, wait_time,locate_by_method, object_recognizer, focus = 'ON'):
@@ -124,6 +134,13 @@ def PressOnObject(driver, wait_time,locate_by_method, object_recognizer, focus =
                 driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
             WebDriverWait(driver, wait_time).until(
                 EC.presence_of_element_located((By.XPATH, object_recognizer))).click()
+        elif locate_by_method == 'CSS_SELECTOR':
+            if focus != 'OFF':
+                scrollToElement = WebDriverWait(driver, wait_time).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, object_recognizer)))
+                driver.execute_script("arguments[0].scrollIntoView();", scrollToElement)
+            WebDriverWait(driver, wait_time).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, object_recognizer))).click()
         time.sleep(3)
 
     except:
@@ -293,7 +310,6 @@ def AlertHandling(driver, wait_time, user, password='None', action='None'):
             driver.switch_to_alert().dismiss()  # close the pop up\alert by selecting Cancel
         else:
             driver.switch_to_alert().accept()  # close the pop up\alert by selecting OK
-
     except:
             PrintText('Alert window was not found')
             # exit('Alert window was not found')
@@ -349,16 +365,12 @@ def InstallUpdateShield(machine_ip, username, password, branch='dev', env = 'new
                 commands = 'cd /root/ericomshield/;' \
                            ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield-from-container.sh -O install-shield-from-container.sh;' \
                            ' chmod +x install-shield-from-container.sh; ' \
-                           'sudo ./install-shield-from-container.sh -d -l -p Erixxx98xxx$'
-                # commandsOrg = 'cd /root/ericomshield/;' \
-                #            ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield.sh -O install-shield.sh;' \
-                #            ' chmod +x install-shield.sh; ' \
-                #            'sudo ./install-shield.sh -R -l -d -p Ericom123$'
+                           'sudo ./install-shield-from-container.sh -d -l -p Ericom98765$'
             elif branch == 'staging':
                 commands = 'cd /root/ericomshield/;' \
-                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield.sh -O install-shield.sh;' \
-                           ' chmod +x install-shield.sh; ' \
-                           'sudo ./install-shield.sh -R -l -s -p Ericom123$'
+                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield-from-container.sh -O install-shield-from-container.sh;' \
+                           ' chmod +x install-shield-from-container.sh; ' \
+                           'sudo ./install-shield-from-container.sh -l -s -p Ericom98765$'
 
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -378,14 +390,14 @@ def InstallUpdateShield(machine_ip, username, password, branch='dev', env = 'new
         try:
             if branch == 'dev':
                 commands = 'cd /root/ericomshield/;' \
-                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield.sh -O install-shield.sh;' \
-                           ' chmod +x install-shield.sh; ' \
-                           'sudo ./install-shield.sh -R -l -d -p Ericom123$'
+                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield-from-container.sh -O install-shield-from-container.sh;' \
+                           ' chmod +x install-shield-from-container.sh; ' \
+                           'sudo ./install-shield-from-container.sh -d -l -p Ericom98765$'
             elif branch == 'staging':
                 commands = 'cd /root/ericomshield/;' \
-                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield.sh -O install-shield.sh;' \
-                           ' chmod +x install-shield.sh; ' \
-                           'sudo ./install-shield.sh -R -l -s -p Ericom123$'
+                           ' wget https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Dev/Kube/scripts/install-shield-from-container.sh -O install-shield-from-container.sh;' \
+                           ' chmod +x install-shield-from-container.sh; ' \
+                           'sudo ./install-shield-from-container.sh -l -s -p Ericom98765$'
 
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -395,20 +407,24 @@ def InstallUpdateShield(machine_ip, username, password, branch='dev', env = 'new
             stdin, stdout, stderr = ssh.exec_command(commands, get_pty=True)
             for line in iter(stdout.readline, ''):
                 print(line, end='')
-            print(' Successfully connected and installed on new clean machine - step *PASS*')
+            print(' Successfully connected and installed - step *PASS*')
             ssh.close()
         except:
             PrintText(' Error occurred during shield machine connected or update  - step - *FAIL*' )
+            ssh.close()
             exit(' Error occurred during shield machine connected or update  - step - *FAIL*')
 
 
-######################################################################
-def CheckRunnigImagesVersions(machine_ip, username, password='None'):
 
+######################################################################
+def CheckRunnigImagesVersions(machine_ip, username, password):
+
+    time.sleep(120)
     try:
 
         commands = 'cd /root/ericomshield/;' \
                    'pip3 install pyyaml==5.3.1;'
+
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -470,14 +486,14 @@ def VerifyFileDownload(driver, wait_time,  download_button_locate_by_method,
         os.system('cd '+ download_folder+'; rm -Rf ' + file_name)
 
         PressOnObject(driver, wait_time, download_button_locate_by_method, download_button_object_recognizer)
-        # try:
-        #     WebDriverWait(driver,wait_time).until(EC.visibility_of_element_located((By.XPATH, '/span/div[2]')))
-        #     PrintText('Ericom downloaded file started in Sanitize mode -  step *PASS*')
-        # except:
-        #     PrintText('Ericom downloaded file started in Enable mode -  step *PASS*')
+        try:
+            WebDriverWait(driver,wait_time).until(EC.visibility_of_element_located((By.XPATH, '/span/div[2]')))
+            PrintText('Ericom download file started in Sanitize mode -  step *PASS*')
+        except:
+            PrintText('Ericom download file started in Enable mode -  step *PASS*')
         time.sleep(30)
         if os.path.exists(download_folder+file_name):
-            PrintText('Ericom downloaded file appears -  step *PASS*')
+            PrintText('Ericom download file appears -  step *PASS*')
         else:
             PrintText('Ericom downloaded file  did not appear -  step *FAIL*')
             exit('Ericom downloaded file did not appear -  step *FAIL*')
@@ -497,6 +513,9 @@ def VerifyElementIsVisible(driver, wait_time, locate_by_method, object_recognize
             PrintText(' Element is visible - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
         elif locate_by_method == 'XPATH':
             WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
+            PrintText(' Element is visible - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
+        elif locate_by_method == 'CSS_SELECTOR':
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.CSS_SELECTOR, object_recognizer)))
             PrintText(' Element is visible - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
     except:
         PrintText(' Element is not visible - step - *FAIL* ' + locate_by_method + ' ' + object_recognizer)
@@ -531,25 +550,54 @@ def CheckIfPageBlocked(driver, wait_time):
         PrintText(' Error occurred during CheckIfPageBlocked function - step - *FAIL*')
         exit(' Error occurred during CheckIfPageBlocked function - step - *FAIL*')
 ######################################################################
+# def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia.cl - black - Phishing 'Block' Policy -	Suspected
+#     PrintText('Words to search in table are: ' + str(args))
+#     WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
+#     table = driver.find_element(By.XPATH, object_recognizer)
+#     # print('Table ' + str(table))
+#     table_rows = table.find_elements(By.TAG_NAME, 'tr')
+#     # print('Rows ' + str(table_rows))
+#     PrintText('Rows count = : ' + str(len(table_rows)))
+#     for row in table_rows:
+#
+#         columns = row.find_elements(By.TAG_NAME, 'td')
+#         PrintText('Columns count = : '+ str(len(columns)))
+#
+#         for arg in iter(args):
+#             for column in columns:
+#                 if arg == column.text:
+#                     PrintText(column.text + ' found in table - step *PASS*')
+#                     break
+
+######################################################################
 def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia.cl - black - Phishing 'Block' Policy -	Suspected
-    print(*args)
+    PrintText('Words to search in table are: ' + str(args))
     WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
     table = driver.find_element(By.XPATH, object_recognizer)
-    print('Table ' + str(table))
+    # print('Table ' + str(table))
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
-    print('Rows ' + str(table_rows))
+    # print('Rows ' + str(table_rows))
+    # PrintText('Rows count = : ' + str(len(table_rows)))
+    found_words=[]
 
-    for row in table_rows:
+    for arg in args:
+            for i,row in enumerate(table_rows):
+                columns = row.find_elements(By.TAG_NAME, 'td')
+                for y,column in enumerate(columns):
+                    print(len(table_rows), i, len(columns), y)
+                    if arg == column.text:
+                        PrintText(column.text + ' found in table - step *PASS*')
+                        found_words.append(arg)
+                        break
 
-        columns = row.find_elements(By.TAG_NAME, 'td')
-        print('Columns ' + str(columns))
 
-        for arg in iter(args):
-            for column in columns:
-                if arg == column.text:
-                    PrintText(column.text + ' found in table - step *PASS*')
-                    break
+    if not set(args).difference(set(found_words)):
+        PrintText('All searched words appear in table - step *PASS*')
+    else:
+        PrintText('Some\All searched words doesn not appear in table - step *FAIL*')
+        PrintText('Missing searched words are: {}'.format(set(args).difference(set(found_words))))
 
+######################################################################
 def CreateNewCleanMachine(browser_type, browser_path, shield_status, headless_mode, proxy_address,
                           jenkins_url, jenkins_user, jenkins_password, email):
 
@@ -932,37 +980,6 @@ def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
     admin_driver.quit()
 
 
-# def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
-#                    headless_mode, proxy_address,wait_time, admin_address, **kwargs):
-#
-#     # Start Driver
-#     admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
-#     # Admin Login
-#     AdminLogin(admin_driver, wait_time, admin_address)
-#     # Go to Policies page
-#     PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
-#     time.sleep(2)
-#     PressOnObject(admin_driver, wait_time, 'XPATH',
-#                             '//*[@id="content"]/div/div/div[1]/div/div[3]/ul/li[3]/i')
-#     time.sleep(2)
-#     PressOnObject(admin_driver, wait_time, 'XPATH',
-#                             '//*[@id="policies-grid"]/vaadin-grid-cell-content[86]/vaadin-checkbox')
-#     time.sleep(2)
-#     PressOnObject(admin_driver, wait_time, 'XPATH',
-#                             '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
-#     time.sleep(2)
-#
-#     print(kwargs)
-#     for key, value in kwargs.items():
-#
-#         SelectOptionFromList(admin_driver, wait_time, 'NAME', key, value)
-#         print('Key = {}, Value = {}'.format(key,value))
-#         time.sleep(2)
-#     PressOnObject(admin_driver, wait_time, 'XPATH',
-#                             '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
-#     time.sleep(3)
-#     admin_driver.quit()
-
 def AddNewPolicy(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address, *domains_names, **kwargs):
 
@@ -995,3 +1012,42 @@ def AddNewPolicy(browser_type, chrome_driver_path,shield_status ,
                             '//*[@id="middle"]/div[2]/cc-modal[1]/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
     time.sleep(3)
     admin_driver.quit()
+
+
+def SendPrintShortkey():
+
+
+    time.sleep(1)
+    pyautogui.keyDown('command')
+    time.sleep(1)
+    pyautogui.keyDown('p')
+    time.sleep(1)
+    pyautogui.keyUp('p')
+    time.sleep(1)
+    pyautogui.keyUp('command')
+    time.sleep(1)
+    pyautogui.press('enter')
+    time.sleep(5)
+######################################################################
+
+def VerifyElementAppearsInPageSource(driver, wait_time, locate_by_method, object_recognizer):
+
+    time.sleep(5)
+    try:
+        if locate_by_method == 'ID':
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.ID, object_recognizer)))
+            PrintText(' Element located in page source - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
+            return 1
+        elif locate_by_method == 'XPATH':
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
+            PrintText(' Element located in page source - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
+            return 1
+        elif locate_by_method == 'NAME':
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.NAME, object_recognizer)))
+            PrintText(' Element located in page source - step - *PASS* ' + locate_by_method + ' ' + object_recognizer)
+            return 1
+    except:
+        PrintText(' Element was not ocated in page source - step - *FAIL* ' + locate_by_method + ' ' + object_recognizer)
+        exit(' Element was not ocated in page source - step - *FAIL* ' + locate_by_method + ' ' + object_recognizer)
+
+######################################################################

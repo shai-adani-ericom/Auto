@@ -43,18 +43,18 @@ class browsing_tests(unittest.TestCase):
 
         Functions.CreateNewCleanMachine('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address,
                                         self.jenkins_url, self.jenkins_user, self.jenkins_password, self.email)
-
+        #
         self.shield_ip = input('Check your email and enter new machine IP(public IP): ')
         self.shield_machine_pass = input('Check your email and enter new machine password: ')
-        #
-        # self.shield_ip = '78.141.216.60'
-        # self.shield_machine_pass = '+m4MJP]4,+Z]V6s'
+
+        # self.shield_ip = '45.76.42.235'
+        # self.shield_machine_pass = '(4Rfj)CXqHmf}8b2'
         self.admin_address = 'https://'+self.shield_ip+':30181'
         self.proxy_address = self.shield_ip+':3128'
-        #
+
         Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user,self.shield_machine_pass, self.branch, env='new')
-        Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
         time.sleep(600)
+        Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
         Functions.ActivateNewEnv('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode,
                                  self.proxy_address,self.wait_time, self.admin_address,
                                  self.activation_portal_url, self.activation_portal_user, self.activation_portal_password)
@@ -68,7 +68,7 @@ class browsing_tests(unittest.TestCase):
         self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
         #Admin Login
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
-        #Check correct build version
+        # Check correct build version
         Functions.PrintText('Check build version')
         res = Functions.CheckObjectText(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="content"]/div[1]/div[1]/div/div[1]/div/div/ul/li/span', self.build_number )
         if not res:
@@ -406,6 +406,9 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText('Page loaded in LDAP authentication mode after providing credentials- step *PASS*')
         # Close client browser
         self.client_driver_chrome.quit()
+
+
+        #SAML
         # ###############################################################################################################################################
         #6 - Suspicious sites - Set Shield\Crystal\Supspicious sites blocked - Browse to suspicious site and get blocked message, check for session history report  - Done
         # Start webdriver for admin
@@ -526,4 +529,5 @@ class browsing_tests(unittest.TestCase):
         pass
 
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=".", report_name= 'New Env Sanity Test Report', add_timestamp=True,report_title='New Env Sanity Test Report'))
+    # unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=".", report_name= 'New Env Sanity Test Report', add_timestamp=True,report_title='New Env Sanity Test Report'))
+    unittest.main()

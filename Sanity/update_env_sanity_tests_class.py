@@ -36,9 +36,10 @@ class browsing_tests(unittest.TestCase):
         # Update shield version on existing machine
         Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user, self.shield_machine_pass,
                                       self.branch)
+        time.sleep(300)
         # Verify post upgrade running images are correct
-        # Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user)
-        time.sleep(180)
+        Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
+
 
         # 1- Check version , Set Shield\Crystal\Disable Print\Disable Download
         # Browse Chrome\Firefox - Verify can't download\print - proxyless Chrome - Done
@@ -120,8 +121,8 @@ class browsing_tests(unittest.TestCase):
         Functions.EnterTextToField(self.client_driver, self.wait_time,'NAME', 'q', 'Shai Adani')
         Functions.HitEnter()
         # # Close Client browser
-        Functions.PrintText('Close Client browser')
-        self.client_driver.quit()
+        # Functions.PrintText('Close Client browser')
+        # self.client_driver.quit()
         Functions.PrintText('Shield,Crystal,No Authentication test - *PASS*')
         # Open Chrome Browser in Shield\Crystal\no print no download, verify print\download buttons are invisible
         Functions.PrintText('Open Chrome Browser in Shield\Crystal no print no download, verify print\download buttons are invisible')
@@ -157,7 +158,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText('Close client - proxyless mode')
         self.client_driver_proxyless.quit()
         Functions.PrintText('Proxyless,Crystal,No Authentication test - *PASS*')
-# ###############################################################################################################################################
+###############################################################################################################################################
         # 2 - Set Shield\Crystal\Enable Print\Sanitize Download - Browse Chrome - download\print enabled - Done
         # Set Admin config to Shield\Crystal\Ignore Certificate\Sanitize download\Enable print
         Functions.PrintText('Set Admin config to Shield\Crystal\Ignore Certificate, Sanitize download\Enable print')
@@ -504,4 +505,5 @@ class browsing_tests(unittest.TestCase):
         pass
 
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=".", report_name= 'Update Env Sanity Test Report', add_timestamp=True,report_title='Update Env Sanity Test Report'))
+    unittest.main()
+    # unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=".", report_name= 'Update Env Sanity Test Report', add_timestamp=True,report_title='Update Env Sanity Test Report'))

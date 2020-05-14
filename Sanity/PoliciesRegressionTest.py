@@ -24,9 +24,7 @@ class policies_regression(unittest.TestCase):
 
     # def test_1_policies_general_view(self):
     #     # Verify Policies compact mode by default
-    #     Functions.PrintText('Start test_policies_general_view - '
-    #                         'Test purpose is to verify default compact mode,'
-    #                         ' switch to verbose mode, verify columns are sortable, and every option appears for each list')
+    #     Functions.PrintText('Start test_1_policies_general_view')
     #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
@@ -78,6 +76,7 @@ class policies_regression(unittest.TestCase):
     #
     #
     # def test_2_policies_regression_override_policy(self):
+    #     Functions.PrintText('Start test_2_policies_regression_override_policy ')
     #
     #     # Set policies configuration
     #     kwargs = {'access':'Shield', 'upload':'Enabled', 'cookies':'Disable', 'media':'Stream',
@@ -148,6 +147,7 @@ class policies_regression(unittest.TestCase):
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #
     # def test_3_policies_regression_new_policy(self):
+    #     Functions.PrintText('Start test_3_policies_regression_new_policy ')
     #     # Create new policy for www.google.com
     #     domains_names = ['www.google.com'] # Bug with Enter after last domain's name
     #     kwargs = {'media': 'Crystal'}
@@ -190,6 +190,7 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('New Policy functionality OK - system is in Crystal mode instead of Stream mode for www.google.com in poroxy less mode step - *PASS*')
     #
     # def test_4_policies_access(self):
+    #     Functions.PrintText('Start test_4_policies_access ')
     #
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
@@ -304,6 +305,7 @@ class policies_regression(unittest.TestCase):
     #                              10, UpdateEnvironment.admin_address, **kwargs)
 
     # def test_5_policies_download(self):  # Disable Preview Enable Sanitize
+    #     Functions.PrintText('Start test_5_policies_download ')
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Crystal'}
@@ -340,7 +342,7 @@ class policies_regression(unittest.TestCase):
     #     # Verify print\download buttons are invisible
     #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'ID', 'download')
     #     self.client_driver.quit()
-    #     Functions.PrintText('Print - Disable step - *PASS*')
+    #     Functions.PrintText('Download - Disable step - *PASS*')
     #
     #     # Set Download = Preview
     #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
@@ -401,7 +403,6 @@ class policies_regression(unittest.TestCase):
     #     Functions.GoToURL(self.client_driver, self.url, 0)
     #     # Wait for page Access now page to be loaded and switch to frame
     #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
-    #     # Press on download option
     #     time.sleep(5)
     #     # Go to online PDF file, download and verify it was downloaded
     #     Functions.VerifyFileDownload(self.client_driver, self.wait_time, 'ID', 'download', self.chrome_download_folder, 'EricomBlazeAdminManual.pdf')
@@ -438,17 +439,48 @@ class policies_regression(unittest.TestCase):
     #     Functions.GoToURL(self.client_driver, self.url, 0)
     #     # Wait for page Access now page to be loaded and switch to frame
     #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
-    #     # Press on download option
     #     time.sleep(5)
     #     # Go to online PDF file, download and verify it was downloaded
     #     Functions.VerifyFileDownload(self.client_driver, self.wait_time, 'ID', 'download', self.chrome_download_folder, 'EricomBlazeAdminManual.pdf')
     #     time.sleep(5)
     #     # Close Client browser
     #     self.client_driver.quit()
-    #     Functions.PrintText('Print - Sanitize step - *PASS*')
+    #     Functions.PrintText('Download - Sanitize step - *PASS*')
+    #
+    #     # Check File Transfer - All - Last 15 minutes report
+    #     # Admin Login
+    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode,
+    #                                                self.proxy_address)
+    #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
+    #     # Go to Reports page
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
+    #     Functions.PrintText(
+    #         'Check File Transfer - All - Last 15 minutes report')
+    #     Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'NAME', 'selectCategory', 'File Transfer')
+    #     time.sleep(2)
+    #     Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'NAME', 'selectReport', 'All')
+    #     time.sleep(2)
+    #     Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'NAME', 'selectTime',
+    #                                    'Last 15 minutes') #Last 15 minutes
+    #     time.sleep(2)
+    #     # Run
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'CSS_SELECTOR',
+    #                             '#content > table > tbody > tr:nth-child(1) > td:nth-child(5) > button')
+    #     time.sleep(5)
+    #     # Search word in report
+    #     words = ['EricomBlazeAdminManual','pdf','1.3 MB','Sanitize','Download','Success']
+    #     Functions.SearchValuesInTable(self.admin_driver, self.wait_time, '//*[@id="file_transfer_summary_report"]/tbody', *words)#//*[@id="content"]/table
+    #     time.sleep(3)
+    #     words = ['EricomBlazeAdminManual', 'pdf', '1.3 MB', 'Enable', 'Download', 'Success']
+    #     Functions.SearchValuesInTable(self.admin_driver, self.wait_time,
+    #                                    '//*[@id="file_transfer_summary_report"]/tbody',*words)  # //*[@id="content"]/table
+    #     time.sleep(3)
+    #     Functions.PrintText('Download test - *PASS*')
+    #     self.admin_driver.quit()
 
 
     # def test_6_policies_readonly(self):  # Interactive Crystal, Read-Only Stream # Bug with Read-Olny Crystal
+    #     Functions.PrintText('Start test_6_policies_readonly ')
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Crystal'}
@@ -530,9 +562,314 @@ class policies_regression(unittest.TestCase):
     #     self.client_driver.quit()
 
 
-####Continue with Print#####
-# https://ericom.atlassian.net/projects/SHIELD?selectedItem=com.atlassian.plugins.atlassian-connect-plugin%3Acom.kanoah.test-manager__main-project-page#!/testCase/SHIELD-T58
-# Step 11
+    # def test_7_policies_print(self):
+    #
+    #     Functions.PrintText('Start test_7_policies_print ')
+    #
+    #     # Config default policy to shield + Stream Download = Enabled Print = Enable
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Stream', 'printing': 'Enable'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Set Download = Enable
+    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
+    #     # Go to Policies page
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="policies-grid"]/vaadin-grid-cell-content[69]/vaadin-checkbox')
+    #     time.sleep(2)
+    #
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
+    #     time.sleep(2)
+    #     Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'XPATH',
+    #                                    '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[1]/td[4]/select', 'Enable')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
+    #     time.sleep(2)
+    #     self.admin_driver.quit()
+    #
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(5)
+    #     Functions.SendPrintShortkey()
+    #     time.sleep(5)
+    #     Functions.PrintText('Go to printer and verify file 1 was printed')
+    #     self.client_driver.quit()
+    #
+    #
+    #     # Config default policy to shield + Stream Download = Enabled Print = Protected
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Stream', 'printing': 'Protected'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Set Download = Enable
+    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
+    #     # Go to Policies page
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="policies-grid"]/vaadin-grid-cell-content[69]/vaadin-checkbox')
+    #     time.sleep(2)
+    #
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
+    #     time.sleep(2)
+    #     Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'XPATH',
+    #                                    '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[2]/dcl-wrapper/edit-defaults-modal-body-class/div/div/div/form/div/table/tbody/tr[1]/td[4]/select', 'Enable')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
+    #     time.sleep(2)
+    #     self.admin_driver.quit()
+    #
+    #
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(5)
+    #     Functions.SendPrintShortkey()
+    #     time.sleep(5)
+    #     Functions.PrintText('Go to printer and verify file 2 was printed')
+    #     Functions.PrintText('Print - Protected step - *PASS*')
+    #     self.client_driver.quit()
+    #
+    #     # Config default policy to shield + Crystal Download = Enabled Print = Disable
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Crystal', 'printing': 'Disable'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     # Wait for page Access now page to be loaded and switch to frame
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     # Verify print\download buttons are invisible
+    #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'ID', 'print')
+    #     # Functions.PressOnObject(self.client_driver, self.wait_time, 'ID', 'print') # Crystal Bug - Print button is not responding
+    #     time.sleep(5)
+    #     Functions.PrintText('Print - Disable step - *PASS*')
+    #     self.client_driver.quit()
+
+    # def test_8_policies_suspend(self):
+    #     Functions.PrintText('Start test_8_policies_suspend ')
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Stream', 'suspend': 'Enable'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Set Resources config
+    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
+    #     # Go to Resources page
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="sideNav"]/ul/li[5]/a/span')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="properties-panel"]/div/form/div/div/cc-toggle[2]/div/label')
+    #     time.sleep(2)
+    #     # Set Suspend R/O tab timeout = 1
+    #     Functions.EnterTextToField(self.admin_driver, self.wait_time, 'NAME', 'ShortBackgroundIdleTimeoutSeconds', '1')
+    #     time.sleep(2)
+    #     # Set Suspend R/W tab timeout = 1
+    #     Functions.EnterTextToField(self.admin_driver, self.wait_time, 'NAME', 'BackgroundIdleTimeoutSeconds', '1')
+    #     time.sleep(2)
+    #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="wrapper"]/app-root/cc-container-with-menu/cc-pool-container/cc-pool/div/div[2]/button[1]')
+    #     time.sleep(2)
+    #     self.admin_driver.quit()
+    #
+    #    # Open Wikipedia and wait for R\O timeout
+    #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #                                                           self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(80)
+    #     Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH', '/html/body/div/h1')
+    #     Functions.PrintText('Suspend - Read Only - session timeout message appears -  step - *PASS*')
+    #     self.client_driver.refresh()
+    #     time.sleep(15)
+    #     Functions.VerifyElementAppearsInPageSource(self.client_driver, self.wait_time, 'XPATH', '//*[@id="shield-shared-frame"]')
+    #     Functions.PrintText('Suspend - Read Only - page loaded after timeout refresh -  step - *PASS*')
+    #     # Close Client browser
+    #     self.client_driver.quit()
+    #
+    #     # Set Policies - Suspend - Disable and verify no session timeout after 1 minutes
+    #     # Set policies configuration
+    #     kwargs = {'suspend': 'Disable'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #
+    #    # Open Wikipedia and wait for R\O timeout
+    #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #                                                           self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(100)
+    #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'XPATH', '/html/body/div/h1')
+    #     Functions.PrintText('Suspend - Disabled - session timeout message did not appear after 1 minute -  step - *PASS*')
+    #     # Close Client browser
+    #     self.client_driver.quit()
+    #
+    #
+    #     # Set policies configuration
+    #     kwargs = {'suspend': '1h'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #
+    #    # Open Wikipedia and wait for R\O timeout
+    #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #                                                           self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(120)
+    #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'XPATH', '/html/body/div/h1')
+    #     Functions.PrintText('Suspend - 1h - session timeout message not appeared after 1 minute -  step - *PASS*')
+    #     time.sleep(3600)
+    #     Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH', '/html/body/div/h1')
+    #     Functions.PrintText('Suspend - 1h - session timeout message appear after 1 hour -  step - *PASS*')
+    #     # Close Client browser
+    #     self.client_driver.quit()
+    #
+    #     #Play youtube movie longer than suspend time and verify it was not suspended
+    #     # Set policies configuration
+    #     kwargs = {'suspend': 'Enable'}
+    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Open youtube movie and wait for R\O timeout
+    #     Functions.PrintText('pen youtube movie and wait for R\O timeout')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #                                                 self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://www.youtube.com/watch?v=8SbUC-UaAxE'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(120)
+    #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'XPATH', '/html/body/div/h1')
+    #     Functions.PrintText(
+    #         'Suspend - 1 minutes - session timeout message not appeared after 1 minute while playing youtube movie -  step - *PASS*')
+    #     # Close Client browser
+    #     self.client_driver.quit()
+
+    def test_9_policies_cookies_enable(self):
+        Functions.PrintText('Start test_9_policies_cookies_enable ')
+        # Set policies configuration
+        kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Enable'}
+        Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+                                 UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+                                 10, UpdateEnvironment.admin_address, **kwargs)
+        # Instagram User=QAEricom Pass = Sa762320!
+        # Open Instagram and login
+        Functions.PrintText('Open Instagram and login ')
+        # Start Chrome browser
+        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+                                                    self.headless_mode, self.proxy_address)
+        # Go to specific web page
+        self.url = 'https://www.instagram.com/'
+        # Go to URL in mode
+        Functions.GoToURL(self.client_driver, self.url, 0)
+        time.sleep(10)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'username', 'QAEricom')
+        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'password', 'Sa762320!')
+        Functions.PressOnObject(self.client_driver, self.wait_time, 'XPATH',
+                                '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button')
+        time.sleep(10)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+                                         '//*[@id="react-root"]/section/main/section/div/h4')
+        Functions.PrintText('Instagram login OK  step - *PASS*')
+        Functions.PrintText('Navigating to Google')
+        # Go to specific web page
+        self.url = 'https://www.google.com/'
+        # Go to URL in mode
+        Functions.GoToURL(self.client_driver, self.url, 0)
+        time.sleep(10)
+        # Open instagram in new tab
+        Functions.PrintText('Open instagram in new tab')
+        self.client_driver.execute_script("window.open('"'https://www.instagram.com/'"')")
+        #Switch to new tab and verify auto login to instagram
+        Functions.PrintText('Switch to new tab and verify auto login to instagram')
+        self.client_driver.switch_to.window(self.client_driver.window_handles[1])
+        time.sleep(2)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+                                         '//*[@id="react-root"]/section/main/section/div/h4')
+        Functions.PrintText('Policies - Cookies - Enabled - Instagram loaded while user logged in  step - *PASS*')
+        self.client_driver.quit()
+
+    def test_10_policies_cookies_disable(self):
+        Functions.PrintText('Start test_9_policies_cookies_disable ')
+        # Set policies configuration
+        kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Disable'}
+        Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+                                 UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+                                 10, UpdateEnvironment.admin_address, **kwargs)
+        # Instagram User=QAEricom Pass = Sa762320!
+        # Open Instagram and login
+        Functions.PrintText('Open Instagram and login ')
+        # Start Chrome browser
+        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+                                                    self.headless_mode, self.proxy_address)
+        # Go to specific web page
+        self.url = 'https://www.instagram.com/'
+        # Go to URL in mode
+        Functions.GoToURL(self.client_driver, self.url, 0)
+        time.sleep(10)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'username', 'QAEricom')
+        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'password', 'Sa762320!')
+        Functions.PressOnObject(self.client_driver, self.wait_time, 'XPATH',
+                                '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button')
+        time.sleep(10)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+                                         '//*[@id="react-root"]/section/main/section/div/h4')
+        Functions.PrintText('Instagram login OK  step - *PASS*')
+        Functions.PrintText('Navigating to Google')
+        # Go to specific web page
+        self.url = 'https://www.google.com/'
+        # Go to URL in mode
+        Functions.GoToURL(self.client_driver, self.url, 0)
+        time.sleep(10)
+        # Open instagram in new tab
+        Functions.PrintText('Open instagram in new tab')
+        self.client_driver.execute_script("window.open('"'https://www.instagram.com/'"')")
+        # Switch to new tab and verify no auto login to instagram
+        Functions.PrintText('Switch to new tab and verify no auto login to instagram')
+        self.client_driver.switch_to.window(self.client_driver.window_handles[1])
+        time.sleep(2)
+        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+        Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'XPATH',
+                                         '//*[@id="react-root"]/section/main/section/div/h4')
+        Functions.PrintText('Policies - Cookies - Disabled - Instagram not auto logged in  step - *PASS*')
+        self.client_driver.quit()
 
     @classmethod
     def tearDownClass(cls):

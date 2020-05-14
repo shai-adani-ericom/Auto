@@ -8,9 +8,9 @@ firefox_driver_path = '../drivers/geckodriver'
 edge_driver_path = '../drivers/msedgedriver'
 chrome_download_folder = '/Users/shaiadani/Downloads/'
 
-shield_ip = '108.61.117.185' # 45.77.136.39
+shield_ip = '136.244.111.246' #
 shield_machine_user = 'root'
-shield_machine_pass = ',5dF8UH9t.pYZ,(_'
+shield_machine_pass = '5zE.qsF,rKQ?fbu1' #
 
 proxy_address = shield_ip+':3128'
 admin_address = 'https://'+shield_ip+':30181'
@@ -24,7 +24,7 @@ rancher_user_name = 'admin'
 rancher_password = 'ericomshield'
 
 headless_mode = 0 # 1 true 0 false
-build_number = '20.04.640'
+build_number = '20.05.644'
 branch = 'dev' # dev staging
 
 restore_file_path = '/Users/shaiadani/PycharmProjects/Ericom/Automation/Sanity/backup.json'

@@ -1,6 +1,7 @@
 # file test_1.py
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 #
@@ -17,12 +18,21 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 #     "autodetect":False
 # }
 
+# driver = webdriver.Remote(
+#     command_executor="http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com:80/wd/hub",
+#     desired_capabilities={
+#         "browserName": "chrome",
+#         "browserVersion": "latest",
+#         "video": "False",
+#         "platform": "WIN10",
+#         "platformName": "windows",
+#     })
 driver = webdriver.Remote(
     command_executor="http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com:80/wd/hub",
     desired_capabilities={
-        "browserName": "chrome",
-        "browserVersion": "latest",
-        "video": "False",
+        "browserName": "firefox",
+        "browserVersion": "75",
+        "video": "True",
         "platform": "WIN10",
         "platformName": "windows",
     })
@@ -36,6 +46,7 @@ try:
     elem = driver.find_element_by_name("q")
     elem.send_keys("documentation")
     elem.send_keys(Keys.RETURN)
+    time.sleep(10)
     assert "No results found." not in driver.page_source
 finally:
     driver.quit()
