@@ -1,9 +1,9 @@
 #Environmet Details for Sanity
 #Shai Adani
 #20/2/2020
+env='UPDATE'
 
-
-chrome_driver_path = '../drivers/chromedriver'
+chrome_driver_path = '../drivers/chromedriver 81'
 firefox_driver_path = '../drivers/geckodriver'
 edge_driver_path = '../drivers/msedgedriver'
 chrome_download_folder = '/Users/shaiadani/Downloads/'
@@ -24,7 +24,7 @@ rancher_user_name = 'admin'
 rancher_password = 'ericomshield'
 
 headless_mode = 0 # 1 true 0 false
-build_number = '20.05.644'
+build_number = '20.05.648'
 branch = 'dev' # dev staging
 
 restore_file_path = '/Users/shaiadani/PycharmProjects/Ericom/Automation/Sanity/backup.json'

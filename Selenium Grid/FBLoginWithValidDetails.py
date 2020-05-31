@@ -10,7 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver import FirefoxOptions
 import datetime
 
@@ -49,7 +49,7 @@ class FBValidDetails:
         #         })
         #     print ("Video: http://s3-eu-west-1.amazonaws.com/be8f5d0a-c2d2-9383-27b0-464cabf83d80/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?"+ self.driver.session_id)
         #
-        #     # self.driver = webdriver.Chrome(options=option, executable_path="/Users/shaiadani/PycharmProjects/Ericom/Automation/drivers/chromedriver")
+        #     # self.driver = webdriver.Chrome(options=option, executable_path="/Users/shaiadani/PycharmProjects/Ericom/Automation/drivers/chromedriver 81")
         #     self.driver.get("http://www.facebook.com")  # open browser with specific site
         #     self.driver.maximize_window()  # maximize window
         # except:
@@ -114,42 +114,53 @@ class FBValidDetails:
         ###################################################################################
         # MicrosoftEdge - working
 
-        try:
+        proxy_address = 'Shield-Load-80e1f451a8f2c519.elb.eu-central-1.amazonaws.com:3128'
+        # try:
+        options = ChromeOptions()
+        # options.add_argument('--headless')
+        options.add_argument('--proxy-server=%s' % proxy_address)
+        options.add_argument('--disable-gpu')
+        options.add_argument("--start-maximized")
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--no-sandbox')  # Bypass OS security model
+        options.add_argument('--disable-infobars')
 
-            self.driver = webdriver.Remote(
-                # options=options,
-                command_executor="http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com:80/wd/hub",
-                desired_capabilities={
-                    "browserName": "MicrosoftEdge",
-                    "browserVersion": "latest",
-                    "video": "True",
-                    "platform": "WIN10",
-                    "platformName": "windows",
-                })
-            print(
-                "Video: http://s3-eu-west-1.amazonaws.com/be8f5d0a-c2d2-9383-27b0-464cabf83d80/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?" + self.driver.session_id)
+        self.driver = webdriver.Remote(
+            command_executor="http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com:80/wd/hub",
+            desired_capabilities={
+                # "browserName": "MicrosoftEdge",
+                "browserName": "chrome",
+                "browserVersion": "latest",
+                "video": "True",
+                "platform": "WIN10",
+                "platformName": "windows",
+            },
+            options=options)
+        print(
+            "Video: http://s3-eu-west-1.amazonaws.com/be8f5d0a-c2d2-9383-27b0-464cabf83d80/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?" + self.driver.session_id)
 
-            self.driver.get("http://www.facebook.com")  # open browser with specific site
+        self.driver.get("http://www.facebook.com")  # open browser with specific site
 
-            ''' Use Navigation Timing  API to calculate the timings that matter the most '''
+        ''' Use Navigation Timing  API to calculate the timings that matter the most '''
 
-            navigationStart = self.driver.execute_script("return window.performance.timing.navigationStart")
-            responseStart = self.driver.execute_script("return window.performance.timing.responseStart")
-            domComplete = self.driver.execute_script("return window.performance.timing.domComplete")
+        navigationStart = self.driver.execute_script("return window.performance.timing.navigationStart")
+        responseStart = self.driver.execute_script("return window.performance.timing.responseStart")
+        domComplete = self.driver.execute_script("return window.performance.timing.domComplete")
 
-            ''' Calculate the performance'''
-            responsetime_calc = responseStart - navigationStart
-            pagefullload_calc = domComplete - responseStart
-            round_trip = responsetime_calc + pagefullload_calc
+        ''' Calculate the performance'''
+        responsetime_calc = responseStart - navigationStart
+        pagefullload_calc = domComplete - responseStart
+        round_trip = responsetime_calc + pagefullload_calc
 
-            print("Response time: {} ms".format(str(responsetime_calc)))
-            print("Page full load time: {} ms".format(str(pagefullload_calc)))
-            print("Round trip : {} ms".format(str(round_trip)))
+        print("Response time: {} ms".format(str(responsetime_calc)))
+        print("Page full load time: {} ms".format(str(pagefullload_calc)))
+        print("Round trip : {} ms".format(str(round_trip)))
 
 
-            self.driver.maximize_window()  # maximize window
-        except:
-            self.WriteToLog(self.fileName, "ERROR - error occurred during facebook home page upload")
+        self.driver.maximize_window()  # maximize window
+        self.driver.get_screenshot_as_file('PageLoad.png')
+        # except:
+        #     self.WriteToLog(self.fileName, "ERROR - error occurred during facebook home page upload")
             ###################################################################################
         # locate email field and enter email
         try:

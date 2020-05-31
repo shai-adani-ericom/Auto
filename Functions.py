@@ -50,7 +50,7 @@ def ReadURLS(file):
 
 def StartBrowser(browser_type, shield_status, headless_mode):
 
-    if 'chromedriver' in browser_type:
+    if 'chromedriver 81' in browser_type:
         try:
             options = ChromeOptions()
 

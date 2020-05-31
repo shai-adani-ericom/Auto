@@ -15,7 +15,7 @@ edge_statistics_file = '../TestResults/EdgeCompareStatistics'
 urls_file = '../FrameModeSanity/URLS2.txt'
 
 
-chrome_driver_path = '../drivers/chromedriver'
+chrome_driver_path = '../drivers/chromedriver 81'
 firefox_driver_path = '../drivers/geckodriver'
 edge_driver_path = '../drivers/msedgedriver'
 

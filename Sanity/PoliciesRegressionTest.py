@@ -25,7 +25,7 @@ class policies_regression(unittest.TestCase):
     # def test_1_policies_general_view(self):
     #     # Verify Policies compact mode by default
     #     Functions.PrintText('Start test_1_policies_general_view')
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -70,7 +70,7 @@ class policies_regression(unittest.TestCase):
     #
     #     # select the Default - All and click the Edit option.Go over each policy and check all values exist (in the drop down list):
     #
-    #     Functions.PoliciesValuesExists('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.PoliciesValuesExists('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address )
     #
@@ -81,11 +81,11 @@ class policies_regression(unittest.TestCase):
     #     # Set policies configuration
     #     kwargs = {'access':'Shield', 'upload':'Enabled', 'cookies':'Disable', 'media':'Stream',
     #               'suspend':'1h', 'clipboard':'Enable', 'certificate':'Ignore', 'adblock': 'Enable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs )
     #     # Set Override media = Crystal and verify shield in Crystal mode instead of Stream mode
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -107,7 +107,7 @@ class policies_regression(unittest.TestCase):
     #     # Browsing to google via shield and verify it is on Crystal mode
     #     Functions.PrintText('Browsing to google via shield and verify it is on Crystal mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -123,7 +123,7 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('Override functionality OK - system is in Crystal mode instead of Stream mode step - *PASS*')
     #     Functions.PrintText('Go to google web page in proxy less mode and verify it  works in Crystal mode as defined in new policy')
     #     # Start Chrome browser
-    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF',
+    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -142,7 +142,7 @@ class policies_regression(unittest.TestCase):
     #
     #     # Return Override configuration to default
     #     kwargs = {'media': 'Default'}
-    #     Functions.OverrideConfig('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.OverrideConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #
@@ -151,13 +151,13 @@ class policies_regression(unittest.TestCase):
     #     # Create new policy for www.google.com
     #     domains_names = ['www.google.com'] # Bug with Enter after last domain's name
     #     kwargs = {'media': 'Crystal'}
-    #     Functions.AddNewPolicy('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.AddNewPolicy('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, *domains_names, **kwargs )
     #     # Go to google web page and verify it  works in Crystal mode
     #     Functions.PrintText(
     #         'Go to google web page and verify it  works in Crystal mode as defined in new policy')
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     self.url = 'https://www.google.com/'
     #     # Go to URL in mode
@@ -172,7 +172,7 @@ class policies_regression(unittest.TestCase):
     #     # Go to google web page in proxy less mode and verify it  works in Crystal mode
     #     Functions.PrintText('Go to google web page in proxy less mode and verify it  works in Crystal mode as defined in new policy')
     #     # Start Chrome browser
-    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF',
+    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -195,13 +195,13 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
     #     kwargs = {'access':'Shield', 'media':'Crystal'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs )
     #     # open URL and verify it was loaded in shield\crystal mode mode
     #     Functions.PrintText('open URL and verify it was loaded in shield\crystal mode mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -217,7 +217,7 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('Access shield step - *PASS*')
     #     Functions.PrintText('Go to google web page in proxy less mode and verify it is being accessed via shield')
     #     # Start Chrome browser
-    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF',
+    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -237,13 +237,13 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to white
     #     # Set policies configuration
     #     kwargs = {'access':'White', 'media':'Crystal'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs )
     #     # open URL and verify it was loaded in white mode
     #     Functions.PrintText('open URL and verify it was loaded in white mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -265,13 +265,13 @@ class policies_regression(unittest.TestCase):
     #
     #     # Set policies configuration
     #     kwargs = {'access':'Black', 'media':'Crystal'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path,'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path,'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs )
     #     # open URL and verify it was loaded in white mode
     #     Functions.PrintText('open URL and verify it was loaded in white mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -284,7 +284,7 @@ class policies_regression(unittest.TestCase):
     #     self.client_driver.quit()
     #     Functions.PrintText('Go to google web page in proxy less mode and verify it is being blocked')
     #     # Start Chrome browser
-    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF',
+    #     self.client_driver_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
@@ -300,7 +300,7 @@ class policies_regression(unittest.TestCase):
     #
     #     # Return system config to Shield\Stream
     #     kwargs = {'access': 'Shield', 'media': 'Stream'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
 
@@ -309,11 +309,11 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Crystal'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #     # Set Download = Disable
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -333,7 +333,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify download option is invisible
     #     Functions.PrintText('Open Chrome Browser and verify download option is invisible in Disable mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -345,7 +345,7 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('Download - Disable step - *PASS*')
     #
     #     # Set Download = Preview
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -365,7 +365,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify download option is invisible
     #     Functions.PrintText('Open Chrome Browser and verify download option is invisible in Preview mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -377,7 +377,7 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('Print - Preview step - *PASS*')
     #
     #     # Set Download = Enable
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -397,7 +397,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify print option is visible in Enable mode
     #     Functions.PrintText('Open Chrome Browser and verify download option is visible in Enable mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -413,7 +413,7 @@ class policies_regression(unittest.TestCase):
     #
     #
     #     # Set Download = Sanitize
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -433,7 +433,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify print option is visible in Sanitize mode
     #     Functions.PrintText('Open Chrome Browser and verify download option is visible in Sanitizeable mode')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -449,7 +449,7 @@ class policies_regression(unittest.TestCase):
     #
     #     # Check File Transfer - All - Last 15 minutes report
     #     # Admin Login
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode,
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode,
     #                                                self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Reports page
@@ -484,10 +484,10 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Crystal
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Crystal'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -507,7 +507,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify that text can be entered into web page text field
     #     Functions.PrintText('Open Chrome Browser and verify that text can be entered into web page text field')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.google.com/'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -526,10 +526,10 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Stream
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Stream'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -549,7 +549,7 @@ class policies_regression(unittest.TestCase):
     #     # Open Chrome Browser and verify that text can be entered into web page text field
     #     Functions.PrintText('Open Chrome Browser and verify that Read-Only Mode message appears')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.youtube.com/'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -569,11 +569,11 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Stream Download = Enabled Print = Enable
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Stream', 'printing': 'Enable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #     # Set Download = Enable
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -593,7 +593,7 @@ class policies_regression(unittest.TestCase):
     #     self.admin_driver.quit()
     #
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -607,11 +607,11 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Stream Download = Enabled Print = Protected
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Stream', 'printing': 'Protected'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #     # Set Download = Enable
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Policies page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -632,7 +632,7 @@ class policies_regression(unittest.TestCase):
     #
     #
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -646,12 +646,12 @@ class policies_regression(unittest.TestCase):
     #     # Config default policy to shield + Crystal Download = Enabled Print = Disable
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Crystal', 'printing': 'Disable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
     #     Functions.GoToURL(self.client_driver, self.url, 0)
@@ -668,11 +668,11 @@ class policies_regression(unittest.TestCase):
     #     Functions.PrintText('Start test_8_policies_suspend ')
     #     # Set policies configuration
     #     kwargs = {'access': 'Shield', 'media': 'Stream', 'suspend': 'Enable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #     # Set Resources config
-    #     self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+    #     self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
     #     Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
     #     # Go to Resources page
     #     Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="sideNav"]/ul/li[5]/a/span')
@@ -692,7 +692,7 @@ class policies_regression(unittest.TestCase):
     #    # Open Wikipedia and wait for R\O timeout
     #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
@@ -711,14 +711,14 @@ class policies_regression(unittest.TestCase):
     #     # Set Policies - Suspend - Disable and verify no session timeout after 1 minutes
     #     # Set policies configuration
     #     kwargs = {'suspend': 'Disable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #
     #    # Open Wikipedia and wait for R\O timeout
     #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
@@ -733,14 +733,14 @@ class policies_regression(unittest.TestCase):
     #
     #     # Set policies configuration
     #     kwargs = {'suspend': '1h'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #
     #    # Open Wikipedia and wait for R\O timeout
     #     Functions.PrintText('Open Wikipedia and wait for R\O timeout')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                           self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://en.wikipedia.org/wiki/Main_Page'
@@ -758,13 +758,13 @@ class policies_regression(unittest.TestCase):
     #     #Play youtube movie longer than suspend time and verify it was not suspended
     #     # Set policies configuration
     #     kwargs = {'suspend': 'Enable'}
-    #     Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
     #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
     #                              10, UpdateEnvironment.admin_address, **kwargs)
     #     # Open youtube movie and wait for R\O timeout
     #     Functions.PrintText('pen youtube movie and wait for R\O timeout')
     #     # Start Chrome browser
-    #     self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
     #                                                 self.headless_mode, self.proxy_address)
     #     # Go to specific web page
     #     self.url = 'https://www.youtube.com/watch?v=8SbUC-UaAxE'
@@ -777,65 +777,112 @@ class policies_regression(unittest.TestCase):
     #     # Close Client browser
     #     self.client_driver.quit()
 
-    def test_9_policies_cookies_enable(self):
-        Functions.PrintText('Start test_9_policies_cookies_enable ')
-        # Set policies configuration
-        kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Enable'}
-        Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
-                                 UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
-                                 10, UpdateEnvironment.admin_address, **kwargs)
-        # Instagram User=QAEricom Pass = Sa762320!
-        # Open Instagram and login
-        Functions.PrintText('Open Instagram and login ')
-        # Start Chrome browser
-        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
-                                                    self.headless_mode, self.proxy_address)
-        # Go to specific web page
-        self.url = 'https://www.instagram.com/'
-        # Go to URL in mode
-        Functions.GoToURL(self.client_driver, self.url, 0)
-        time.sleep(10)
-        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
-        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'username', 'QAEricom')
-        Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'password', 'Sa762320!')
-        Functions.PressOnObject(self.client_driver, self.wait_time, 'XPATH',
-                                '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button')
-        time.sleep(10)
-        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
-        Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
-                                         '//*[@id="react-root"]/section/main/section/div/h4')
-        Functions.PrintText('Instagram login OK  step - *PASS*')
-        Functions.PrintText('Navigating to Google')
-        # Go to specific web page
-        self.url = 'https://www.google.com/'
-        # Go to URL in mode
-        Functions.GoToURL(self.client_driver, self.url, 0)
-        time.sleep(10)
-        # Open instagram in new tab
-        Functions.PrintText('Open instagram in new tab')
-        self.client_driver.execute_script("window.open('"'https://www.instagram.com/'"')")
-        #Switch to new tab and verify auto login to instagram
-        Functions.PrintText('Switch to new tab and verify auto login to instagram')
-        self.client_driver.switch_to.window(self.client_driver.window_handles[1])
-        time.sleep(2)
-        Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
-        Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
-                                         '//*[@id="react-root"]/section/main/section/div/h4')
-        Functions.PrintText('Policies - Cookies - Enabled - Instagram loaded while user logged in  step - *PASS*')
-        self.client_driver.quit()
+    # def test_9_policies_cookies_enable(self):
+    #     Functions.PrintText('Start test_9_policies_cookies_enable ')
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Enable'}
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Instagram User=QAEricom Pass = Sa762320!
+    #     # Open Instagram and login
+    #     Functions.PrintText('Open Instagram and login ')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
+    #                                                 self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://www.instagram.com/'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(10)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'username', 'QAEricom')
+    #     Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'password', 'Sa762320!')
+    #     Functions.PressOnObject(self.client_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button')
+    #     time.sleep(10)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+    #                                      '//*[@id="react-root"]/section/main/section/div/h4')
+    #     Functions.PrintText('Instagram login OK  step - *PASS*')
+    #     Functions.PrintText('Navigating to Google')
+    #     # Go to specific web page
+    #     self.url = 'https://www.google.com/'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(10)
+    #     # Open instagram in new tab
+    #     Functions.PrintText('Open instagram in new tab')
+    #     self.client_driver.execute_script("window.open('"'https://www.instagram.com/'"')")
+    #     #Switch to new tab and verify auto login to instagram
+    #     Functions.PrintText('Switch to new tab and verify auto login to instagram')
+    #     self.client_driver.switch_to.window(self.client_driver.window_handles[1])
+    #     time.sleep(2)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+    #                                      '//*[@id="react-root"]/section/main/section/div/h4')
+    #     Functions.PrintText('Policies - Cookies - Enabled - Instagram loaded while user logged in  step - *PASS*')
+    #     self.client_driver.quit()
+    #
+    # def test_10_policies_cookies_disable(self):
+    #     Functions.PrintText('Start test_10_policies_cookies_disable ')
+    #     # Set policies configuration
+    #     kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Disable'}
+    #     Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
+    #                              UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
+    #                              10, UpdateEnvironment.admin_address, **kwargs)
+    #     # Instagram User=QAEricom Pass = Sa762320!
+    #     # Open Instagram and login
+    #     Functions.PrintText('Open Instagram and login ')
+    #     # Start Chrome browser
+    #     self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
+    #                                                 self.headless_mode, self.proxy_address)
+    #     # Go to specific web page
+    #     self.url = 'https://www.instagram.com/'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(10)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'username', 'QAEricom')
+    #     Functions.EnterTextToField(self.client_driver, self.wait_time, 'NAME', 'password', 'Sa762320!')
+    #     Functions.PressOnObject(self.client_driver, self.wait_time, 'XPATH',
+    #                             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button')
+    #     time.sleep(10)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.VerifyElementIsVisible(self.client_driver, self.wait_time, 'XPATH',
+    #                                      '//*[@id="react-root"]/section/main/section/div/h4')
+    #     Functions.PrintText('Instagram login OK  step - *PASS*')
+    #     Functions.PrintText('Navigating to Google')
+    #     # Go to specific web page
+    #     self.url = 'https://www.google.com/'
+    #     # Go to URL in mode
+    #     Functions.GoToURL(self.client_driver, self.url, 0)
+    #     time.sleep(10)
+    #     # Open instagram in new tab
+    #     Functions.PrintText('Open instagram in new tab')
+    #     self.client_driver.execute_script("window.open('"'https://www.instagram.com/'"')")
+    #     # Switch to new tab and verify no auto login to instagram
+    #     Functions.PrintText('Switch to new tab and verify no auto login to instagram')
+    #     self.client_driver.switch_to.window(self.client_driver.window_handles[1])
+    #     time.sleep(2)
+    #     Functions.SwitchToFrame(self.client_driver, self.wait_time, 'ID', 'crystal-frame-top')
+    #     Functions.VerifyElementInvisibility(self.client_driver, self.wait_time, 'XPATH',
+    #                                      '//*[@id="react-root"]/section/main/section/div/h4')
+    #     Functions.PrintText('Policies - Cookies - Disabled - Instagram not auto logged in  step - *PASS*')
+    #     self.client_driver.quit()
 
-    def test_10_policies_cookies_disable(self):
-        Functions.PrintText('Start test_9_policies_cookies_disable ')
+    def test_11_policies_upload_enable(self):
+        Functions.PrintText('Start test_11_policies_upload_enable ')
         # Set policies configuration
-        kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Enable', 'cookies': 'Disable'}
-        Functions.PoliciesConfig('chromedriver', UpdateEnvironment.chrome_driver_path, 'OFF',
+        kwargs = {'access': 'Shield', 'media': 'Crystal', 'suspend': 'Disable', 'cookies': 'Disable', 'upload': 'Enable'}
+        Functions.PoliciesConfig('chromedriver 81', UpdateEnvironment.chrome_driver_path, 'OFF',
                                  UpdateEnvironment.headless_mode, UpdateEnvironment.proxy_address,
                                  10, UpdateEnvironment.admin_address, **kwargs)
         # Instagram User=QAEricom Pass = Sa762320!
         # Open Instagram and login
         Functions.PrintText('Open Instagram and login ')
         # Start Chrome browser
-        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+        self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
                                                     self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.instagram.com/'
@@ -873,7 +920,8 @@ class policies_regression(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        time.sleep(2)
+        time.sleep(2)0.
+
 
 if __name__ == '__main__':
     # unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output=".", report_name= 'Policies Regression Test Report', add_timestamp=True,report_title='Policies Regression Test Report'))

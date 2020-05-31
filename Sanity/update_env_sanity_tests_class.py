@@ -32,20 +32,21 @@ class browsing_tests(unittest.TestCase):
         self.chrome_download_folder = UpdateEnvironment.chrome_download_folder
         self.proxy_address = UpdateEnvironment.proxy_address
         self.restore_file_path = UpdateEnvironment.restore_file_path
-
-        # Update shield version on existing machine
-        Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user, self.shield_machine_pass,
-                                      self.branch)
-        time.sleep(300)
-        # Verify post upgrade running images are correct
-        Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
-
+        self.env = UpdateEnvironment.env
+        #
+        # # Update shield version on existing machine
+        # Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user, self.shield_machine_pass,
+        #                               self.branch)
+        # time.sleep(300)
+        # # Verify post upgrade running images are correct
+        # Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
+        #
 
         # 1- Check version , Set Shield\Crystal\Disable Print\Disable Download
         # Browse Chrome\Firefox - Verify can't download\print - proxyless Chrome - Done
         # Start webdriver for admin
         Functions.PrintText('Start Admin browser')
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
         #Admin Login
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
         #Check correct build version
@@ -76,7 +77,7 @@ class browsing_tests(unittest.TestCase):
                                 '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
         # Go to Profiles page
         Functions.PrintText('Going to Profiles page - Set Basic Auth = no , set LDAP = no')
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_5"]/a')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
         # Press on Basic Authentication option
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="nobackgroundcontent"]/cc-toggle[2]/div/label')
@@ -109,7 +110,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in Shield\Crystal, Go to URL Press on Object
         Functions.PrintText('Open Client Browser in Shield\Crystal, Go to URL Press on Object')
         # Start Chrome browser
-        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
+        self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
         time.sleep(10)
         # Go to specific web page
         self.url = 'https://www.google.com/'
@@ -127,7 +128,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in Shield\Crystal\no print no download, verify print\download buttons are invisible
         Functions.PrintText('Open Chrome Browser in Shield\Crystal no print no download, verify print\download buttons are invisible')
         # Start Chrome browser
-        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+        self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
         Functions.GoToURL(self.client_driver, self.url, 0)
@@ -143,7 +144,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in non shield, Go to URL Press on Object in proxy-less mode
         Functions.PrintText('Open Client Browser in non shield\Crystal, Go to URL Press on Object in proxy-less mode')
         # Start Chrome browser
-        self.client_driver_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
+        self.client_driver_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.google.com/'
         self.proxyless_url = 'https://' + self.shield_ip + ':30443' + '/?url=' + self.url
@@ -164,7 +165,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText('Set Admin config to Shield\Crystal\Ignore Certificate, Sanitize download\Enable print')
         #Start webdriver for admin
         Functions.PrintText('Start Admin browser')
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
         #Admin Login
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
         # Go to Policies page
@@ -191,7 +192,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText(
             'Open Chrome Browser in Shield\Crystal yes print sanitize download')
         # Start Chrome browser
-        self.client_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
+        self.client_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON', self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
         Functions.GoToURL(self.client_driver, self.url, 0)
@@ -211,7 +212,7 @@ class browsing_tests(unittest.TestCase):
 ################################################################################################################
         #3 - Set Shield\Stream\ - Browse Chrome\Firefox - proxyless Chrome\Firefox - Done
         # Admin Login
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
         # Set Admin config to Shield\Stream\Ignore Certificate
         Functions.PrintText('Set Admin config to Shield\Crystal\Ignore Certificate')
@@ -234,7 +235,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in Shield\Stream, Go to URL Press on Object
         Functions.PrintText('Open Client Browser in Shield\Stream, Go to URL Press on Object')
         # Start Chrome browser
-        self.client_driver_chrome = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
+        self.client_driver_chrome = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
         # Start FireFox browser
         self.client_driver_ff = Functions.StartBrowser('geckodriver', self.firefox_driver_path, 'ON', self.headless_mode, self.proxy_address)
         # Go to specific web page
@@ -250,7 +251,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in non shield, Go to URL Press on Object in proxy-less mode
         Functions.PrintText('Open Client Browser in non shield\Stream, Go to URL Press on Object in proxy-less mode')
         # Start Chrome browser
-        self.client_driver_chrome_proxyless = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
+        self.client_driver_chrome_proxyless = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address)
         self.client_driver_ff_proxyless = Functions.StartBrowser('geckodriver', self.firefox_driver_path, 'OFF', self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.google.com/'
@@ -269,12 +270,12 @@ class browsing_tests(unittest.TestCase):
         #Set Basic authentication = Yes and verify you don't get required page without credentials
         #Start webdriver for admin
         Functions.PrintText('Start Admin browser')
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
         # Admin Login
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
         # Go to Profiles page
         Functions.PrintText('Going to Profiles page - Set Basic Auth = Yes , set LDAP = no')
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_5"]/a')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
         # Press on Basic Authentication option
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="nobackgroundcontent"]/cc-toggle[2]/div/label')
@@ -307,7 +308,7 @@ class browsing_tests(unittest.TestCase):
         # Open Chrome Browser in Shield\Stream, Go to URL Press on Object
         Functions.PrintText('Open Client Browser while Basic Authentication = Yes, Try to go to URL and verify you can not reach it')
         # Start Chrome browser
-        self.client_driver_chrome = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
+        self.client_driver_chrome = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path,'ON', self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.google.com/'
         Functions.GoToURL(self.client_driver_chrome, self.url, 0)
@@ -326,7 +327,7 @@ class browsing_tests(unittest.TestCase):
         # Set Basic authentication = No LDAP = Yes and verify you don't get required page without credentials
         # Start webdriver for admin
         Functions.PrintText('Start Admin browser')
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF',
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF',
                                                    self.headless_mode, self.proxy_address)
         # Admin Login
         Functions.PrintText('Admin login')
@@ -336,7 +337,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'ID', 'login-submit')
         # Go to Profiles page
         Functions.PrintText('Going to Profiles page - Set Basic Auth = No , set LDAP = Yes')
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_5"]/a')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
         # Press on Basic Authentication option
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="nobackgroundcontent"]/cc-toggle[2]/div/label')
@@ -370,7 +371,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText(
             'Open Client Browser while Basic Authentication = Yes, Try to go to URL and verify you can not reach it')
         # Start Chrome browser
-        self.client_driver_chrome = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+        self.client_driver_chrome = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
                                                            self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'https://www.google.com/'
@@ -390,7 +391,7 @@ class browsing_tests(unittest.TestCase):
         #6 - Suspicious sites - Set Shield\Crystal\Supspicious sites blocked - Browse to suspicious site and get blocked message, check for session history report  - Done
         # Start webdriver for admin
         Functions.PrintText('Start Admin browser')
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode,
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode,
                                                    self.proxy_address)
         # Admin Login
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
@@ -411,8 +412,8 @@ class browsing_tests(unittest.TestCase):
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="middle"]/div[2]/cc-modal/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
         # Go to Settings page
-        Functions.PrintText('Going to Settings page - Set Suspected sites = Block, Potential phising = block')
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_3"]/a/span')
+        Functions.PrintText('Going to Settings page - Set Suspected sites = Block, Potential phishing = block')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="sideNav"]/ul/li[4]/a/span')
         # Press on Suspicious sites option
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="nobackgroundcontent"]/cc-toggle[2]/div/label')
@@ -430,7 +431,7 @@ class browsing_tests(unittest.TestCase):
 
         # Go to Profiles page
         Functions.PrintText('Going to Profiles page - Set Basic Auth = no , set LDAP = no')
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_5"]/a')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
         # Press on Basic Authentication option
         Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH',
                                 '//*[@id="nobackgroundcontent"]/cc-toggle[2]/div/label')
@@ -465,7 +466,7 @@ class browsing_tests(unittest.TestCase):
         Functions.PrintText(
             'Open Client Browser and try to browse to suspicious site, verify blocked by shield')
         # Start Chrome browser
-        self.client_driver_chrome = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'ON',
+        self.client_driver_chrome = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'ON',
                                                            self.headless_mode, self.proxy_address)
         # Go to specific web page
         self.url = 'http://plenavia.cl/cxc/D2017HL/u.php'
@@ -477,11 +478,11 @@ class browsing_tests(unittest.TestCase):
 
         # Check if report contains blocked activity
         # Admin Login
-        self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode,
+        self.admin_driver = Functions.StartBrowser('chromedriver 81', self.chrome_driver_path, 'OFF', self.headless_mode,
                                                    self.proxy_address)
         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
         # Go to Reports page
-        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_4"]/a/span')
+        Functions.PressOnObject(self.admin_driver, self.wait_time, 'XPATH', '//*[@id="el_3"]/a/span')
         # Reports - Select Category = Sessions Select Report = Session History time = Last 15 minutes
         Functions.PrintText('Reports - Select Category = Sessions Select Report = Session History time = Last 15 minutes')
         Functions.SelectOptionFromList(self.admin_driver, self.wait_time, 'NAME', 'selectCategory', 'Sessions')
@@ -495,9 +496,9 @@ class browsing_tests(unittest.TestCase):
         # words = ['plenavia.cl','black',"Phishing 'Block' Policy", 'Suspected']
         Functions.SearchValuesInTable(self.admin_driver, self.wait_time,'//*[@id="content"]/table', 'plenavia.cl','black',"Phishing 'Block' Policy", 'Suspected')
         self.admin_driver.quit()
-        Functions.CheckBackUpRetore(self.shield_ip, self.shield_machine_user, self.shield_machine_pass, 'chromedriver',
+        Functions.CheckBackUpRetore(self.shield_ip, self.shield_machine_user, self.shield_machine_pass, 'chromedriver 81',
                                       self.chrome_driver_path, 'OFF',
-                          self.headless_mode, self.proxy_address, self.wait_time, self.admin_address, self.restore_file_path)
+                          self.headless_mode, self.proxy_address, self.wait_time, self.admin_address, self.restore_file_path, self.env)
     # #########################################################################################################################################
 
     @classmethod
