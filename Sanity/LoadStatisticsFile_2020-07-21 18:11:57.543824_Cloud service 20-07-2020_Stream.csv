@@ -1,0 +1,11 @@
+URL,IsLoadedStatus,TimeStamp,ResponseTime,PageLoadTime,RoundTrip
+http://www.easyjet.com,YES,2020-07-21 18:12:09.732763,693,248,941
+http://www.gmail.com,YES,2020-07-21 18:12:20.840325,309,157,466
+http://www.facebook.com,YES,2020-07-21 18:12:31.957393,226,130,356
+http://www.youtube.com,YES,2020-07-21 18:12:43.063575,518,142,660
+http://www.instagram.com,YES,2020-07-21 18:12:54.165984,171,145,316
+http://wordpress.com/,YES,2020-07-21 18:13:07.111841,2253,159,2412
+http://blogspot.com/,YES,2020-07-21 18:13:21.349626,3528,164,3692
+http://apple.com/,YES,2020-07-21 18:13:34.099506,2156,293,2449
+http://adobe.com/,YES,2020-07-21 18:13:48.899875,4103,154,4257
+http://tumblr.com/,YES,2020-07-21 18:14:01.032738,1423,164,1587

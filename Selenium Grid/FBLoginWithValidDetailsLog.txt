@@ -1,0 +1,90 @@
+2020-05-17 16:54:50.597579 Starting with FBLoginWithValidDetails test 
+2020-05-17 16:54:50.608930 ERROR - error occurred during facebook home page upload
+2020-05-17 16:54:50.609037 Can't find email field - loginToFacebook Test failed
+2020-05-17 16:54:50.609212 Can't find password field - loginToFacebook Test failed
+2020-05-17 16:54:50.609281 Can't find password field - loginToFacebook Test failed
+2020-05-17 16:56:04.558692 Starting with FBLoginWithValidDetails test 
+2020-05-17 16:56:04.641251 ERROR - error occurred during facebook home page upload
+2020-05-17 16:56:04.641352 Can't find email field - loginToFacebook Test failed
+2020-05-17 16:56:04.641481 Can't find password field - loginToFacebook Test failed
+2020-05-17 16:56:04.641565 Can't find password field - loginToFacebook Test failed
+2020-05-17 17:08:27.381907 Starting with FBLoginWithValidDetails test 
+2020-05-17 17:09:13.544223 Can't find password field - loginToFacebook Test failed
+2020-05-17 17:09:14.172364 Ending with FBLoginWithValidDetails test 
+2020-05-19 13:27:17.229018 Starting with FBLoginWithValidDetails test 
+2020-05-19 13:28:04.658894 Ending with FBLoginWithValidDetails test 
+2020-05-19 13:29:41.404075 Starting with FBLoginWithValidDetails test 
+2020-05-19 13:30:06.765694 Ending with FBLoginWithValidDetails test 
+2020-05-19 13:35:05.909372 Starting with FBLoginWithValidDetails test 
+2020-05-19 13:35:37.734088 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:29:39.461736 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:30:37.953178 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:30:48.112628 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:30:58.254603 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:30:58.612437 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:35:33.883372 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:36:17.632120 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:36:27.742147 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:36:37.828611 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:36:38.186283 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:44:04.848188 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:44:48.917562 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:44:59.073458 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:45:09.390353 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:45:09.751537 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:46:32.073508 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:47:16.160530 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:47:26.713129 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:47:37.030160 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:47:37.373249 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:49:20.027544 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:50:06.569834 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:50:16.628348 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:50:26.707322 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:50:27.049595 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:53:01.966076 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:53:45.629220 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:53:55.716514 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:54:05.822629 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:54:06.159524 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:55:15.287095 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:55:40.992210 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:55:51.053309 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:56:01.141186 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:56:01.491109 Ending with FBLoginWithValidDetails test 
+2020-05-20 14:59:08.931678 Starting with FBLoginWithValidDetails test 
+2020-05-20 14:59:31.664666 Can't find email field - loginToFacebook Test failed
+2020-05-20 14:59:41.773012 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:59:51.838587 Can't find password field - loginToFacebook Test failed
+2020-05-20 14:59:52.194176 Ending with FBLoginWithValidDetails test 
+2020-05-20 15:01:33.803573 Starting with FBLoginWithValidDetails test 
+2020-05-20 15:01:56.420530 Can't find email field - loginToFacebook Test failed
+2020-05-20 15:02:06.501716 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:02:16.551697 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:02:16.898301 Ending with FBLoginWithValidDetails test 
+2020-05-20 15:05:05.108497 Starting with FBLoginWithValidDetails test 
+2020-05-20 15:05:48.678636 Can't find email field - loginToFacebook Test failed
+2020-05-20 15:05:58.762759 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:06:08.844896 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:06:09.188580 Ending with FBLoginWithValidDetails test 
+2020-05-20 15:53:45.802162 Starting with FBLoginWithValidDetails test 
+2020-05-20 15:56:58.218850 Can't find email field - loginToFacebook Test failed
+2020-05-20 15:57:08.318883 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:57:18.360838 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:57:18.831983 Ending with FBLoginWithValidDetails test 
+2020-05-20 15:58:10.272494 Starting with FBLoginWithValidDetails test 
+2020-05-20 15:58:40.464260 Can't find password field - loginToFacebook Test failed
+2020-05-20 15:58:40.994012 Ending with FBLoginWithValidDetails test 
+2020-05-20 16:00:43.849111 Starting with FBLoginWithValidDetails test 
+2020-05-20 16:01:08.344556 Ending with FBLoginWithValidDetails test 
+2020-05-20 16:13:07.627859 Starting with FBLoginWithValidDetails test 
+2020-05-20 16:13:31.615272 Can't find email field - loginToFacebook Test failed
+2020-05-20 16:13:41.687389 Can't find password field - loginToFacebook Test failed
+2020-05-20 16:13:51.697031 Can't find password field - loginToFacebook Test failed
+2020-05-20 16:13:52.159761 Ending with FBLoginWithValidDetails test 
+2020-05-20 16:14:52.880096 Starting with FBLoginWithValidDetails test 
+2020-05-20 16:15:16.572614 Can't find email field - loginToFacebook Test failed
+2020-05-20 16:15:26.607898 Can't find password field - loginToFacebook Test failed
+2020-05-20 16:15:36.668599 Can't find password field - loginToFacebook Test failed
+2020-05-20 16:15:37.472485 Ending with FBLoginWithValidDetails test 
+2020-05-20 16:25:24.078217 Starting with FBLoginWithValidDetails test 

@@ -1,0 +1,26 @@
+URL,IsLoadedStatus,TimeStamp,ResponseTime,PageLoadTime,RoundTrip
+http://www.easyjet.com,YES,2020-07-21 18:05:11.906307,2653,433,3086
+http://www.gmail.com,YES,2020-07-21 18:05:24.665732,2100,122,2222
+http://www.facebook.com,YES,2020-07-21 18:05:37.363516,2000,151,2151
+http://www.youtube.com,YES,2020-07-21 18:05:49.345725,1323,122,1445
+http://www.instagram.com,YES,2020-07-21 18:06:01.651371,1606,162,1768
+http://www.easyjet.com,YES,2020-07-21 18:06:18.801091,295,248,543
+http://www.gmail.com,YES,2020-07-21 18:06:30.858973,1393,120,1513
+http://www.facebook.com,YES,2020-07-21 18:06:42.005678,732,142,874
+http://www.youtube.com,YES,2020-07-21 18:06:53.112875,300,116,416
+http://www.instagram.com,YES,2020-07-21 18:07:05.225867,1451,116,1567
+http://www.easyjet.com,YES,2020-07-21 18:07:22.434715,516,286,802
+http://www.gmail.com,YES,2020-07-21 18:07:33.538899,508,144,652
+http://www.facebook.com,YES,2020-07-21 18:07:44.655666,171,111,282
+http://www.youtube.com,YES,2020-07-21 18:07:55.776035,187,157,344
+http://www.instagram.com,YES,2020-07-21 18:08:07.675634,1192,161,1353
+http://www.easyjet.com,YES,2020-07-21 18:08:24.994042,502,273,775
+http://www.gmail.com,YES,2020-07-21 18:08:36.104857,327,103,430
+http://www.facebook.com,YES,2020-07-21 18:08:47.232233,196,147,343
+http://www.youtube.com,YES,2020-07-21 18:08:58.352609,175,152,327
+http://www.instagram.com,YES,2020-07-21 18:09:09.456129,155,143,298
+http://www.easyjet.com,YES,2020-07-21 18:09:26.825726,406,241,647
+http://www.gmail.com,YES,2020-07-21 18:09:37.935292,521,117,638
+http://www.facebook.com,YES,2020-07-21 18:09:49.047183,232,110,342
+http://www.youtube.com,YES,2020-07-21 18:10:00.151815,523,115,638
+http://www.instagram.com,YES,2020-07-21 18:10:11.255339,205,119,324
