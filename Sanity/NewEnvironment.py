@@ -3,7 +3,7 @@
 #20/2/2020
 env='NEW'
 
-chrome_driver_path = '../drivers/chromedriver 81'
+chrome_driver_path = '../drivers/chromedriver'
 firefox_driver_path = '../drivers/geckodriver'
 edge_driver_path = '../drivers/msedgedriver'
 chrome_download_folder = '/Users/shaiadani/Downloads/'
@@ -24,7 +24,7 @@ rancher_user_name = 'admin'
 rancher_password = 'ericomshield'
 
 headless_mode = 0 # 1 true 0 false
-build_number = '20.05.647'
+build_number = '20.05.659'
 branch = 'dev' # dev staging
 
 jenkins_url = 'https://jenkins.shield-service.net/job/ENV/job/create-test-env/'
@@ -37,3 +37,10 @@ activation_portal_user = 'ericom'
 activation_portal_password = 'ericom2017'
 
 restore_file_path = '/Users/shaiadani/PycharmProjects/Ericom/Automation/Sanity/backup.json'
+
+
+#usfull command post installation
+# ##########
+# sudo helm list --all-namespaces
+# sudo kubectl get pods --all-namespaces
+# kubectl describe pods mng-admin-7f49bb79b4-5hmtc --namespace management

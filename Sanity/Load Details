@@ -1,0 +1,104 @@
+https://www.gridlastic.com/grid-configuration.php
+user: shaia
+pass: Sa762320
+
+Docs -  http://shielddocs.ericom.com/docs/shielddocs/en/latest/release/deploymentguide/installation.html
+user =
+pass =
+
+Europe (Frankfurt)
+Basic Shield Load balancer address - Shield-Load-80e1f451a8f2c519.elb.eu-central-1.amazonaws.com
+Admin UI - main - https://35.157.73.217:30181/#/dashboard
+
+AWS link - https://971644952510.signin.aws.amazon.com/console
+User = Shai
+Pass = Ericom123$
+
+
+Zoom recording = Zoom 3 nodes cluster setup AWS - Shmaya.mp4
+
+Basic Shield machines SSH user name = ubuntu (In addition to Shield-Load.pem file)
+Basic Shield-Load1 IP= 35.157.73.217
+Basic Shield-Load2 IP= 3.121.196.21
+Basic Shield-Load3 IP= 18.184.155.4
+
+EU (Frankfurt IP range)
+18.192.0.0/15
+64.252.89.0/24
+99.77.136.0/24
+52.58.0.0/15
+18.184.0.0/15
+52.57.0.0/16
+54.93.0.0/16
+3.124.0.0/14
+52.95.255.128/28
+18.156.0.0/14
+64.252.87.0/24
+99.77.158.0/24
+99.77.247.0/24
+64.252.88.0/24
+52.29.0.0/16
+15.193.4.0/24
+3.120.0.0/14
+18.198.0.0/15
+52.94.248.112/28
+35.156.0.0/14
+18.153.0.0/16
+64.252.86.0/24
+18.196.0.0/15
+52.95.248.0/24
+18.194.0.0/15
+52.46.184.0/22
+52.28.0.0/16
+15.177.68.0/23
+
+
+https://adani.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
+https://Lv3x9P64WYxY9M1BdrjDJf1ZmTwuN5Up:qNMqtIkfxH4wkVXnc7QLcHAprXJ5Suk97@ADANI.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
+
+https://adani.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
+
+
+For JMETER
+https://www.swtestacademy.com/performance-testing-jmeter-selenium-grid/
+
+https://jmeter-plugins.org/wiki/RemoteDriverConfig/
+
+https://jmeter-plugins.org/wiki/WebDriverTutorial/
+
+https://www.blazemeter.com/blog/jmeter-webdriver-sampler
+
+https://jmeter-plugins.org/wiki/WebDriverSampler/
+https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/WebDriver.html
+
+Header-Proxy
+AWS machine = Ubuntu Server 18.04 LTS (HVM), SSD Volume Type 64bit
+Type = t3a.xlarge 4CPU 16G Memory
+Download & Run scripts:
+https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Rel-20.03/Kube/scripts/configure-sysctl-values.sh
+https://raw.githubusercontent.com/EricomSoftwareLtd/Shield/Rel-20.03/Kube/scripts/install-docker.sh
+
+Pull & Run image
+sudo docker login
+user = ericomshield1
+pass = Ericom98765$
+
+sudo docker run -d -p 3138:3128 "securebrowsing/proxy-no-auth:200701-11.50"
+
+Docker Code location in git
+https://github.com/EricomSoftwareLtd/SB/tree/master/Containers/Docker/squid-no_auth
+
+#####
+Docker command for proxy header:
+
+sudo docker run --env UPSTREAM_HOST=qa-med1-ericom.shield-service.net --env UPSTREAM_PORT=3128 --env TENANT_ID=507d1ae5-ba7c-4295-89e4-f21bf4f4fe1c --rm -p 3127:3128 "securebrowsing/proxy-basic:200702-09.52"
+
+Proxy Address that can be used:
+https://ericom.atlassian.net/projects/SHIELD?selectedItem=com.atlassian.plugins.atlassian-connect-plugin%3Acom.kanoah.test-manager__main-project-page#!/testCase/SHIELD-T343
+
+ToDo:
+1) Define new Tenant, Set header proxy to Med1 Proxy with new Tenant, Run Stability
+2) Define new Tenant, Set header proxy to Med1 Proxy-less with new Tenant, Run Stability
+
+
+

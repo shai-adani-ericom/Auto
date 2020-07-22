@@ -10,7 +10,7 @@ from load1_test_class import load1
 LoadEnvironment.load_statistics_file = Functions.CreateLoadStatisticsFile(LoadEnvironment.fileName,
                                                                           LoadEnvironment.shield_mode,
                                                                           LoadEnvironment.build_number)
-parallel_actions = LoadEnvironment.parallel_actions
+# parallel_actions = LoadEnvironment.parallel_actions
 
 #Test # 1
 LoadTest = unittest.TestLoader().loadTestsFromTestCase(load1)
@@ -19,7 +19,7 @@ LoadTest = unittest.TestLoader().loadTestsFromTestCase(load1)
 test_suite = unittest.TestSuite([LoadTest])
 
 # running tests suite
-unittest.TextTestRunner(verbosity=1).run(test_suite)
+unittest.TextTestRunner(verbosity=2).run(test_suite)
 
 
 # print('Load test ran for {} seconds = {} minutes = {} hours'.format(total_run_time, total_run_time/60, total_run_time/3600))

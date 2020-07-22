@@ -13,7 +13,7 @@ def StartBrowser(browser_type, browser_path,shield_status, headless_mode, proxy_
 
     time.sleep(3)
 
-    if 'chromedriver 81' in browser_type:
+    if 'chromedriver' in browser_type:
         try:
             options = ChromeOptions()
 
@@ -594,7 +594,7 @@ def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia
     if not set(args).difference(set(found_words)):
         PrintText('All searched words appear in table - step *PASS*')
     else:
-        PrintText('Some\All searched words doesn not appear in table - step *FAIL*')
+        PrintText('Some\All searched words does not appear in table - step *FAIL*')
         PrintText('Missing searched words are: {}'.format(set(args).difference(set(found_words))))
 
 ######################################################################
@@ -612,12 +612,12 @@ def CreateNewCleanMachine(browser_type, browser_path, shield_status, headless_mo
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[1]/tr[1]/td[3]/div/select', email, focus='OFF')
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[2]/tr[1]/td[3]/div/select', 'clean', focus='OFF')
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[3]/tr[1]/td[3]/div/select',
-                         '2', focus='OFF')
+                         '4', focus='OFF')
     PressOnObject(driver, 10, 'ID', 'yui-gen1-button', focus='OFF')
     time.sleep(5)
     driver.quit()
 
-
+######################################################################
 def ActivateNewEnv(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address,
                    activation_portal_url, activation_portal_user, activation_portal_password):
@@ -671,7 +671,7 @@ def ActivateNewEnv(browser_type, chrome_driver_path,shield_status ,
     time.sleep(10)
 
     admin_driver.quit()
-
+######################################################################
 def ConfigNewEnvAdmin(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address): # After system activation - tech mode, active directory, redirect
     # open Admin
@@ -732,7 +732,7 @@ def ConfigNewEnvAdmin(browser_type, chrome_driver_path,shield_status ,
     admin_driver.quit()
 
 
-
+######################################################################
 def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address, file_path, env):
 
@@ -968,12 +968,12 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
             PrintText(' Backup/Restore  - step - *FAIL*')
             exit(' Backup/Restore  - step - *FAIL*')
 
-
+######################################################################
 def UploadFile(driver, wait_time, object_recognizer_type, object_recognizer, file_path):
     if object_recognizer_type == 'XPATH':
         upload = WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
         upload.send_keys(file_path)
-
+######################################################################
 def PoliciesConfig(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address, **kwargs):
 
@@ -1001,7 +1001,7 @@ def PoliciesConfig(browser_type, chrome_driver_path,shield_status ,
     time.sleep(3)
     admin_driver.quit()
 
-
+######################################################################
 def PoliciesValuesExists(browser_type, chrome_driver_path,shield_status,
                    headless_mode, proxy_address, wait_time, admin_address):
 
@@ -1054,7 +1054,7 @@ def PoliciesValuesExists(browser_type, chrome_driver_path,shield_status,
 
     time.sleep(3)
     admin_driver.quit()
-
+######################################################################
 def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address, **kwargs):
 
@@ -1086,7 +1086,7 @@ def OverrideConfig(browser_type, chrome_driver_path,shield_status ,
     time.sleep(3)
     admin_driver.quit()
 
-
+######################################################################
 def AddNewPolicy(browser_type, chrome_driver_path,shield_status ,
                    headless_mode, proxy_address,wait_time, admin_address, *domains_names, **kwargs):
 
@@ -1120,7 +1120,7 @@ def AddNewPolicy(browser_type, chrome_driver_path,shield_status ,
     time.sleep(3)
     admin_driver.quit()
 
-
+######################################################################
 def SendPrintShortkey():
 
 
@@ -1177,16 +1177,20 @@ def Performance(driver):
     return responsetime_calc, pagefullload_calc, round_trip
 
 ######################################################################
-def OpenNewTab(load_statistics_file, driver,tabs_count,wait_time_between_new_tabs, args): # loaded not_loaded
+def OpenNewTab(load_statistics_file, driver,tabs_count,wait_time_between_new_tabs, max_session_time,shield_mode, args): # loaded not_loaded
 
     for i,arg in enumerate(args):
+
         print('Web page '+str(i+1) + ' ' + arg)
         time.sleep(wait_time_between_new_tabs)
         driver.execute_script("window.open('" + str(arg) + "')")
         driver.switch_to.window(driver.window_handles[i + 1])
-        page_loaded = Check_if_page_loaded(driver, 10)
-        statistics= Performance(driver)
-        time.sleep(wait_time_between_new_tabs)
+        page_loaded = Check_if_page_loaded(driver, 20, shield_mode)
+        print('Before')
+        driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
+        print('After')
+
+        statistics = Performance(driver)
         time_stamp = str(datetime.datetime.now())
         if page_loaded == 1:
             SaveLoadStatistics(
@@ -1206,16 +1210,31 @@ def OpenNewTab(load_statistics_file, driver,tabs_count,wait_time_between_new_tab
                 'NA',
                 'NA',
                 'NA')
-
+        print('Total sessions so far = {}'.format(i+1))
+        time.sleep(wait_time_between_new_tabs)
         if i+1 == tabs_count:
             break
+
+    time.sleep(max_session_time-wait_time_between_new_tabs)
+
+
+
+    for tab in range (i+2):
+        print('Going to close {} tabs'.format(i+2))
+        print('closing tab # {}'.format(tab))
+        driver.switch_to.window(driver.window_handles[0])
+        time.sleep(3)
+        driver.close()
+        time.sleep(3)
+        print('closed tab # {}'.format(tab))
+
 
 ######################################################################
 def PrepareGrid(browser_type, browser_version, os, instances_count):
 
-    browser_path = '../drivers/chromedriver 81'
+    browser_path = '../drivers/chromedriver'
     driver = webdriver.Chrome(executable_path=browser_path)
-    driver.get("http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com/preset?"
+    driver.get("https://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com/preset?"
                "&browserName1=chrome"
                "&browserVersion1=latest"
                "&platform1=win10"
@@ -1233,7 +1252,7 @@ def Start_remote_browser(proxy_address):
     options.add_argument('--disable-infobars')
 
     driver = webdriver.Remote(
-        command_executor="http://tSs6t1WI7e9xBkIPeChaaaRShxbZVCdf:lvbEnYdk2dItng9sIgtJharoxtdjWgo7@ADANI.gridlastic.com:80/wd/hub",
+        command_executor="http://Lv3x9P64WYxY9M1BdrjDJf1ZmTwuN5Up:qNMqtIkfxH4wkVXnc7QLcHAprXJ5Suk9@ADANI.gridlastic.com:80/wd/hub",
         desired_capabilities={
             # "browserName": "MicrosoftEdge",
             "browserName": "chrome",
@@ -1246,7 +1265,8 @@ def Start_remote_browser(proxy_address):
     return driver
 ######################################################################
 def Browse_open_x_tabs(load_statistics_file,remote_browser,proxy_address, chrome_driver_path, headless_mode,
-                       tabs_count, wait_time_between_new_tabs,wait_time_before_browser_quit, *urls):
+                       tabs_count, wait_time_between_new_tabs,
+                       max_session_time,shield_mode, *urls):
 
 
     print('Starting browse cycle at {}'.format(datetime.datetime.now()))
@@ -1257,25 +1277,41 @@ def Browse_open_x_tabs(load_statistics_file,remote_browser,proxy_address, chrome
             "Video: http://s3-eu-west-1.amazonaws.com/be8f5d0a-c2d2-9383-27b0-464cabf83d80/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?" + driver.session_id)
     else:
         print('Starting local browser')
-        driver = StartBrowser('chromedriver 81', chrome_driver_path, 'ON', headless_mode, proxy_address)
+        driver = StartBrowser('chromedriver', chrome_driver_path, 'ON', headless_mode, proxy_address)
 
-    time.sleep(2)
+    time.sleep(1)
     driver.maximize_window()
-    OpenNewTab(load_statistics_file,driver, tabs_count, wait_time_between_new_tabs, *urls)
-    time.sleep(wait_time_before_browser_quit)
-    driver.quit()
+    OpenNewTab(load_statistics_file,driver, tabs_count, wait_time_between_new_tabs, max_session_time,shield_mode, *urls)
+    # if driver:
+    #     print('Driver not closed - closing')
+    #     time.sleep(1)
+    #     try:
+    #         driver.quit()
+    #     except:
+    #         print('All tabs were already closed - close browsers did not pass , step skipped')
+    # else:
+    #     print('Driver closed, continue.')
 
 ######################################################################
-def Check_if_page_loaded(driver, wait_time):
+def Check_if_page_loaded(driver, wait_time, shield_mode):
 
-    time.sleep(2)
-    try:
-        WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.ID, 'canvas')))
-        PrintText('Shield page loaded -  action *PASS*')
-        return 1
-    except:
-        PrintText('Shield page not loaded -  action *FAIL*')
-        return 0
+    time.sleep(1)
+    if shield_mode == 'Stream' or shield_mode == 'Frame':
+        try:
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.ID, 'canvas')))
+            PrintText('Shield page loaded in  {} mode -  action *PASS*'.format(shield_mode))
+            return 1
+        except:
+            PrintText('Shield page not loaded {} mode -  action *FAIL*'.format(shield_mode))
+            return 0
+    elif shield_mode == 'Crystal':
+        try:
+            WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.ID, 'crystal-frame-top')))
+            PrintText('Shield page loaded in  {} mode -  action *PASS*'.format(shield_mode))
+            return 1
+        except:
+            PrintText('Shield page not loaded {} mode -  action *FAIL*'.format(shield_mode))
+            return 0
 ######################################################################
 
 def CreateLoadStatisticsFile(fileName, shield_mode, build_number):
@@ -1303,3 +1339,17 @@ def SaveLoadStatistics(
         writer = csv.writer(f)
         writer.writerow([url_column_name, is_loaded, time_stamp, responsetime_calc, pagefullload_calc, round_trip])
 ######################################################################
+def SimulatePageDown(driver, time_between_scrolls):
+    time.sleep(time_between_scrolls)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+######################################################################
+def SimulatePageUp(driver, time_between_scrolls):
+    time.sleep(time_between_scrolls)
+    driver.execute_script("scrollBy(0,-1000);")
+
+######################################################################
+def callback_PageDownUp(driver, time_between_scrolls, run_time):
+    total_run_time = time.time() + run_time
+    while time.time() < total_run_time:
+        SimulatePageDown(driver, time_between_scrolls)
+        SimulatePageUp(driver, time_between_scrolls)
