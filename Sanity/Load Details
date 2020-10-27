@@ -53,10 +53,12 @@ EU (Frankfurt IP range)
 15.177.68.0/23
 
 
-https://adani.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
-https://Lv3x9P64WYxY9M1BdrjDJf1ZmTwuN5Up:qNMqtIkfxH4wkVXnc7QLcHAprXJ5Suk97@ADANI.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
 
-https://adani.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=5
+https://BtLOiFN3RdYh90r7HJsTMVzmbKohBnl3:HXHPtlIaowionAlUaDDMp3ZrDdz5rLYY@adani-hub.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=win10&nodes1=1&
+browserName2=chrome&browserVersion2=latest&platform2=linux&nodes2=1
+
+https://BtLOiFN3RdYh90r7HJsTMVzmbKohBnl3:HXHPtlIaowionAlUaDDMp3ZrDdz5rLYY@adani-hub.gridlastic.com/preset?&browserName1=chrome&browserVersion1=latest&platform1=linux&nodes1=200
+
 
 
 For JMETER
@@ -96,9 +98,13 @@ sudo docker run --env UPSTREAM_HOST=qa-med1-ericom.shield-service.net --env UPST
 Proxy Address that can be used:
 https://ericom.atlassian.net/projects/SHIELD?selectedItem=com.atlassian.plugins.atlassian-connect-plugin%3Acom.kanoah.test-manager__main-project-page#!/testCase/SHIELD-T343
 
-ToDo:
-1) Define new Tenant, Set header proxy to Med1 Proxy with new Tenant, Run Stability
-2) Define new Tenant, Set header proxy to Med1 Proxy-less with new Tenant, Run Stability
+###Proxy Header Setup on cloud###
+https://github.com/shai-adani-ericom/Proxy.git
 
+Please create machine on Med1(Should be relatively strong in order to handle 1000 sessions and better network performance)
+Git pull from attached link
+Execute build & run sh scripts
+Send me public IP\DNS details
 
+18.192.0.0/15,64.252.89.0/24,99.77.136.0/24,52.58.0.0/15,18.184.0.0/15,52.57.0.0/16,54.93.0.0/16,3.124.0.0/14,52.95.255.128/28,18.156.0.0/14,64.252.87.0/24,99.77.158.0/24,99.77.247.0/24,64.252.88.0/24,52.29.0.0/16,15.193.4.0/24,3.120.0.0/14,18.198.0.0/15,52.94.248.112/28,35.156.0.0/14,18.153.0.0/16,64.252.86.0/24,18.196.0.0/15,52.95.248.0/24,18.194.0.0/15,52.46.184.0/22,52.28.0.0/16,15.177.68.0/23
 

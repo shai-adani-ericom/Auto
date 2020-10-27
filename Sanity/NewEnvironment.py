@@ -24,7 +24,7 @@ rancher_user_name = 'admin'
 rancher_password = 'ericomshield'
 
 headless_mode = 0 # 1 true 0 false
-build_number = '20.05.659'
+build_number = '20.10.682'
 branch = 'dev' # dev staging
 
 jenkins_url = 'https://jenkins.shield-service.net/job/ENV/job/create-test-env/'

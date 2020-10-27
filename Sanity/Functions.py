@@ -14,26 +14,26 @@ def StartBrowser(browser_type, browser_path,shield_status, headless_mode, proxy_
     time.sleep(3)
 
     if 'chromedriver' in browser_type:
-        try:
-            options = ChromeOptions()
+        # try:
+        options = ChromeOptions()
 
-            if shield_status == 'ON':
-                options.add_argument('--proxy-server=%s' % proxy_address)
-            if headless_mode == 1:
-                options.add_argument('--headless')
-                options.add_argument('--disable-gpu')
-                options.add_argument("--start-maximized")
-            # options.add_argument('user-data-dir=/Users/shaiadani/Library/Application Support/Google/Chrome/Default')
-            options.add_argument('--ignore-certificate-errors')
-            options.add_argument('--no-sandbox')  # Bypass OS security model
-            options.add_argument('--disable-infobars')
-            driver = webdriver.Chrome(options=options, executable_path=browser_path)
-            driver.delete_all_cookies()
-            driver.set_window_size('1920', '878')
-            return driver
-        except:
-            PrintText('Error occurred in StartBrowser function')
-            exit('Error occurred in StartBrowser function') # canceled for SOCK test
+        if shield_status == 'ON':
+            options.add_argument('--proxy-server=%s' % proxy_address)
+        if headless_mode == 1:
+            options.add_argument('--headless')
+            options.add_argument('--disable-gpu')
+            options.add_argument("--start-maximized")
+        # options.add_argument('user-data-dir=/Users/shaiadani/Library/Application Support/Google/Chrome/Default')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--no-sandbox')  # Bypass OS security model
+        options.add_argument('--disable-infobars')
+        driver = webdriver.Chrome(options=options, executable_path=browser_path)
+        driver.delete_all_cookies()
+        driver.set_window_size('1920', '878')
+        return driver
+        # except:
+        #     PrintText('Error occurred in StartBrowser function')
+        #     exit('Error occurred in StartBrowser function') # canceled for SOCK test
     elif 'geckodriver' in browser_type:
         options = FirefoxOptions()
         desired_capability = webdriver.DesiredCapabilities.FIREFOX
@@ -609,10 +609,15 @@ def CreateNewCleanMachine(browser_type, browser_path, shield_status, headless_mo
     time.sleep(5)
 
     PressOnObject(driver, 10, 'XPATH', '//*[@id="tasks"]/div[4]/a[1]', focus='OFF')
+    time.sleep(2)
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[1]/tr[1]/td[3]/div/select', email, focus='OFF')
+    time.sleep(2)
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[2]/tr[1]/td[3]/div/select', 'clean', focus='OFF')
-    SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[3]/tr[1]/td[3]/div/select',
-                         '4', focus='OFF')
+    time.sleep(2)
+    SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[3]/tr[1]/td[3]/div/select', 'regular', focus='OFF')
+    time.sleep(2)
+    SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[4]/tr[1]/td[3]/div/select','1', focus='OFF')
+    time.sleep(2)
     PressOnObject(driver, 10, 'ID', 'yui-gen1-button', focus='OFF')
     time.sleep(5)
     driver.quit()
@@ -887,9 +892,6 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
                 # open Admin
                 admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
                 # Admin Login
-                AdminLogin(admin_driver, wait_time, admin_address)
-                time.sleep(3)
-
                 # Go to Policies page
                 PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
                 # Edit Default - All Domain
@@ -953,10 +955,10 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
 
         # Verify system configuration restored
         # Go to Policies page
-        PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
-        PressOnObject(admin_driver, wait_time, 'XPATH',
+        PressOnObject(admin_driver, 60 , 'XPATH', '//*[@id="el_1"]/a/span')
+        PressOnObject(admin_driver, 60, 'XPATH',
                                 '//*[@id="policies-grid"]/vaadin-grid-cell-content[69]/vaadin-checkbox')
-        PressOnObject(admin_driver, wait_time, 'XPATH',
+        PressOnObject(admin_driver, 60, 'XPATH',
                                 '//*[@id="content"]/div/div/div[1]/div/div[1]/ul/li[2]/i')
         # Policies - Edit Default - All Domain
         PrintText(' Policies - Edit Default - All Domain - Checking that Rendering mode is Stream')
@@ -982,7 +984,6 @@ def PoliciesConfig(browser_type, chrome_driver_path,shield_status ,
     # Admin Login
     AdminLogin(admin_driver, wait_time, admin_address)
     # Go to Policies Page
-    # Go to Policies page
     PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
     # Edit Default - All Domain
     PressOnObject(admin_driver, wait_time, 'XPATH',
@@ -1229,6 +1230,7 @@ def OpenNewTab(load_statistics_file, driver,tabs_count,wait_time_between_new_tab
         print('closed tab # {}'.format(tab))
 
 
+
 ######################################################################
 def PrepareGrid(browser_type, browser_version, os, instances_count):
 
@@ -1252,14 +1254,14 @@ def Start_remote_browser(proxy_address):
     options.add_argument('--disable-infobars')
 
     driver = webdriver.Remote(
-        command_executor="http://Lv3x9P64WYxY9M1BdrjDJf1ZmTwuN5Up:qNMqtIkfxH4wkVXnc7QLcHAprXJ5Suk9@ADANI.gridlastic.com:80/wd/hub",
+        command_executor="http://BtLOiFN3RdYh90r7HJsTMVzmbKohBnl3:HXHPtlIaowionAlUaDDMp3ZrDdz5rLYY@adani-hub.gridlastic.com/wd/hub",
         desired_capabilities={
             # "browserName": "MicrosoftEdge",
             "browserName": "chrome",
             "browserVersion": "latest",
-            "video": "True",
-            "platform": "WIN10",
-            "platformName": "windows",
+            "video": "False",
+            # "platform": "WIN10",
+            "platformName": "linux",
         },
         options=options)
     return driver
@@ -1274,7 +1276,7 @@ def Browse_open_x_tabs(load_statistics_file,remote_browser,proxy_address, chrome
         print('Starting remote browser')
         driver = Start_remote_browser(proxy_address)
         print(
-            "Video: http://s3-eu-west-1.amazonaws.com/be8f5d0a-c2d2-9383-27b0-464cabf83d80/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?" + driver.session_id)
+            "Video: https://s3-eu-central-1.amazonaws.com/kc30ea1a-6y9b-a38c-1e64-t2u8d227g8a9/e97e4b2c-f903-9941-7915-dce56d84b8f0/play.html?" + driver.session_id)
     else:
         print('Starting local browser')
         driver = StartBrowser('chromedriver', chrome_driver_path, 'ON', headless_mode, proxy_address)
@@ -1282,15 +1284,16 @@ def Browse_open_x_tabs(load_statistics_file,remote_browser,proxy_address, chrome
     time.sleep(1)
     driver.maximize_window()
     OpenNewTab(load_statistics_file,driver, tabs_count, wait_time_between_new_tabs, max_session_time,shield_mode, *urls)
-    # if driver:
-    #     print('Driver not closed - closing')
-    #     time.sleep(1)
-    #     try:
-    #         driver.quit()
-    #     except:
-    #         print('All tabs were already closed - close browsers did not pass , step skipped')
-    # else:
-    #     print('Driver closed, continue.')
+
+    if driver:
+        print('Driver not closed - closing')
+        time.sleep(1)
+        try:
+            driver.close()
+        except:
+            print('All tabs were already closed - close browsers did not pass , step skipped')
+    else:
+        print('Driver closed, continue.')
 
 ######################################################################
 def Check_if_page_loaded(driver, wait_time, shield_mode):
@@ -1339,17 +1342,17 @@ def SaveLoadStatistics(
         writer = csv.writer(f)
         writer.writerow([url_column_name, is_loaded, time_stamp, responsetime_calc, pagefullload_calc, round_trip])
 ######################################################################
-def SimulatePageDown(driver, time_between_scrolls):
-    time.sleep(time_between_scrolls)
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-######################################################################
-def SimulatePageUp(driver, time_between_scrolls):
-    time.sleep(time_between_scrolls)
-    driver.execute_script("scrollBy(0,-1000);")
-
-######################################################################
-def callback_PageDownUp(driver, time_between_scrolls, run_time):
-    total_run_time = time.time() + run_time
-    while time.time() < total_run_time:
-        SimulatePageDown(driver, time_between_scrolls)
-        SimulatePageUp(driver, time_between_scrolls)
+# def SimulatePageDown(driver, time_between_scrolls):
+#     time.sleep(time_between_scrolls)
+#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+# ######################################################################
+# def SimulatePageUp(driver, time_between_scrolls):
+#     time.sleep(time_between_scrolls)
+#     driver.execute_script("scrollBy(0,-1000);")
+#
+# ######################################################################
+# def callback_PageDownUp(driver, time_between_scrolls, run_time):
+#     total_run_time = time.time() + run_time
+#     while time.time() < total_run_time:
+#         SimulatePageDown(driver, time_between_scrolls)
+#         SimulatePageUp(driver, time_between_scrolls)

@@ -19,7 +19,7 @@ class load1(unittest.TestCase):
         self.headless_mode = LoadEnvironment.headless_mode
         self.tabs_count = LoadEnvironment.tabs_count
         self.wait_time_between_new_tabs = LoadEnvironment.wait_time_between_new_tabs
-        self.wait_time_before_browser_quit = LoadEnvironment.wait_time_before_browser_quit
+        # self.wait_time_before_browser_quit = LoadEnvironment.wait_time_before_browser_quit
         self.urls = LoadEnvironment.urls
         self.load_statistics_file = LoadEnvironment.load_statistics_file
         # self.parallel_actions = LoadEnvironment.parallel_actions
@@ -41,20 +41,22 @@ class load1(unittest.TestCase):
 
         while time.time() < self.test_run_time:
             load_browsers = []
-            # for i in range(self.parallel_actions):
+            # while len(load_browsers) < int(self.max_concurrent_sessions / self.tabs_count):
             for i in range(int(self.max_concurrent_sessions/self.tabs_count)):
                 i = multiprocessing.Process(target=LoadBrowsers)
                 load_browsers.append(i)
 
+
             instances = []
 
             for test in load_browsers:
+                # while len(instances) < int(self.max_concurrent_sessions/self.tabs_count):
                 test.start()
                 instances.append(test)
                 time.sleep(self.ramp_up_time)
-            # Sync all tests to finish together
-            for instance in instances:
-                instance.join()
+                # # Sync all tests to finish together
+                # for instance in instances:
+                #     instance.join()
 
     @classmethod
     def tearDownClass(cls):

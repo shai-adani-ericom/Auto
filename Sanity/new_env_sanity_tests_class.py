@@ -44,28 +44,28 @@ class browsing_tests(unittest.TestCase):
         #
         # Functions.CreateNewCleanMachine('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address,
         #                                 self.jenkins_url, self.jenkins_user, self.jenkins_password, self.email)
-        #
+
         # self.shield_ip = input('Check your email and enter new machine IP(public IP): ')
         # self.shield_machine_pass = input('Check your email and enter new machine password: ')
-
-        self.shield_ip = '45.32.234.229'
-        self.shield_machine_pass = 'k}F1zzBpZdd_%%S3'
+#
+        self.shield_ip = '95.179.181.199'
+        self.shield_machine_pass = '[sS96}LRhFaeXLnk'
         self.admin_address = 'https://'+self.shield_ip+':30181'
         self.proxy_address = self.shield_ip+':3128'
-#
-#         # Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user,self.shield_machine_pass, self.branch, env='new')
-#         # time.sleep(600)
-#         Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
-#         Functions.ActivateNewEnv('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode,
-#                                  self.proxy_address,self.wait_time, self.admin_address,
-#                                  self.activation_portal_url, self.activation_portal_user, self.activation_portal_password)
-#         Functions.ConfigNewEnvAdmin('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address, self.wait_time, self.admin_address)
-#         # 1- Check version , Set Shield\Crystal\Disable Print\Disable Download
-#         # Browse Chrome\Firefox - Verify can't download\print - proxyless Chrome - Done
-#         # Start webdriver for admin
+
+        # Functions.InstallUpdateShield(self.shield_ip, self.shield_machine_user,self.shield_machine_pass, self.branch, env='new')
+        # time.sleep(600)
+        # Functions.CheckRunnigImagesVersions(self.shield_ip, self.shield_machine_user, self.shield_machine_pass)
+        # Functions.ActivateNewEnv('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode,
+        #                          self.proxy_address,self.wait_time, self.admin_address,
+        #                          self.activation_portal_url, self.activation_portal_user, self.activation_portal_password)
+        # Functions.ConfigNewEnvAdmin('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address, self.wait_time, self.admin_address)
+        # 1- Check version , Set Shield\Crystal\Disable Print\Disable Download
+        # Browse Chrome\Firefox - Verify can't download\print - proxyless Chrome - Done
+        # Start webdriver for admin
 #         Functions.PrintText('Start Admin browser')
 #         self.admin_driver = Functions.StartBrowser('chromedriver', self.chrome_driver_path,'OFF', self.headless_mode, self.proxy_address)
-#         #Admin Login
+# #        #Admin Login
 #         Functions.AdminLogin(self.admin_driver, self.wait_time, self.admin_address)
 #         # Check correct build version
 #         Functions.PrintText('Check build version')
@@ -177,7 +177,7 @@ class browsing_tests(unittest.TestCase):
 #         Functions.PrintText('Close client - proxyless mode')
 #         self.client_driver_proxyless.quit()
 #         Functions.PrintText('Proxyless,Crystal,No Authentication test - *PASS*')
-# # ###############################################################################################################################################
+# ###############################################################################################################################################
 #         # 2 - Set Shield\Crystal\Enable Print\Sanitize Download - Browse Chrome - download\print enabled - Done
 #         # Set Admin config to Shield\Crystal\Ignore Certificate\Sanitize download\Enable print
 #         Functions.PrintText('Set Admin config to Shield\Crystal\Ignore Certificate, Sanitize download\Enable print')
@@ -340,7 +340,7 @@ class browsing_tests(unittest.TestCase):
 #         Functions.PrintText('Page loaded in BASIC authentication mode after providing credentials- step *PASS*')
 #         # Close client browser
 #         self.client_driver_chrome.quit()
-# # # ################################################################################################################
+# ################################################################################################################
 #         # 5 - Set Shield\LDAP Authentication\ - Verify can't browse without credentials, Verify browsing with credentials
 #         # Set Basic authentication = No LDAP = Yes and verify you don't get required page without credentials
 #         # Start webdriver for admin
@@ -405,10 +405,10 @@ class browsing_tests(unittest.TestCase):
 #         Functions.PrintText('Page loaded in LDAP authentication mode after providing credentials- step *PASS*')
 #         # Close client browser
 #         self.client_driver_chrome.quit()
-# #
-# #
+#
+#
 #         #SAML
-# # #         ###############################################################################################################################################
+#         ###############################################################################################################################################
 #         #6 - Suspicious sites - Set Shield\Crystal\Supspicious sites blocked - Browse to suspicious site and get blocked message, check for session history report  - Done
 #         # Start webdriver for admin
 #         Functions.PrintText('Start Admin browser')
