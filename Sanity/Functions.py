@@ -790,7 +790,7 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
             try:
                 # Perform change in Admin
                 # open Admin
-                admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+                admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, admin_address)
                 # Admin Login
                 AdminLogin(admin_driver, wait_time, admin_address)
                 time.sleep(3)
@@ -890,7 +890,12 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
             try:
                 # Perform change in Admin
                 # open Admin
-                admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode, proxy_address)
+                admin_driver = StartBrowser(browser_type, chrome_driver_path, shield_status, headless_mode,
+                                            proxy_address)
+                # Admin Login
+                AdminLogin(admin_driver, wait_time, admin_address)
+                time.sleep(3)
+                print('Browser started ip = {} '.format(admin_address))
                 # Admin Login
                 # Go to Policies page
                 PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
@@ -951,11 +956,11 @@ def CheckBackUpRetore(machine_ip, username, password , browser_type, chrome_driv
         PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="nobackgroundcontent"]/cc-toggle[13]/div/div/div/button')
         time.sleep(2)
         PressOnObject(admin_driver, wait_time, 'XPATH', '//*[@id="wrapper"]/app-root/cc-container-with-menu/cc-settings-container/cc-settings/cc-modal[5]/div/div/div/div[3]/table/tbody/tr/td[2]/div/button[1]')
-        time.sleep(60)
+        time.sleep(120)
 
         # Verify system configuration restored
         # Go to Policies page
-        PressOnObject(admin_driver, 60 , 'XPATH', '//*[@id="el_1"]/a/span')
+        PressOnObject(admin_driver, 120 , 'XPATH', '//*[@id="el_1"]/a/span')
         PressOnObject(admin_driver, 60, 'XPATH',
                                 '//*[@id="policies-grid"]/vaadin-grid-cell-content[69]/vaadin-checkbox')
         PressOnObject(admin_driver, 60, 'XPATH',
