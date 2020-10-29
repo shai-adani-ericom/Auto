@@ -42,14 +42,14 @@ class browsing_tests(unittest.TestCase):
 
 
 
-        Functions.CreateNewCleanMachine('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address,
-                                        self.jenkins_url, self.jenkins_user, self.jenkins_password, self.email)
+        # Functions.CreateNewCleanMachine('chromedriver', self.chrome_driver_path, 'OFF', self.headless_mode, self.proxy_address,
+        #                                 self.jenkins_url, self.jenkins_user, self.jenkins_password, self.email)
 
-        self.shield_ip = input('Check your email and enter new machine IP(public IP): ')
-        self.shield_machine_pass = input('Check your email and enter new machine password: ')
+        # self.shield_ip = input('Check your email and enter new machine IP(public IP): ')
+        # self.shield_machine_pass = input('Check your email and enter new machine password: ')
 #
-        # self.shield_ip = '136.244.111.71'
-        # self.shield_machine_pass = 'a7!WXdzGHUu,697n'
+        self.shield_ip = '108.61.198.223'
+        self.shield_machine_pass = 'Aj1]nj}V2a94Np2E'
         self.admin_address = 'https://'+self.shield_ip+':30181'
         self.proxy_address = self.shield_ip+':3128'
 

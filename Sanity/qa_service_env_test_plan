@@ -1,0 +1,42 @@
+Phase 1
+Existing Tenant - Only IP authentication
+1. Browse via Geo proxy
+2. Check active sessions report
+3. Browse via Geo proxyless
+4. Check active sessions report
+5. Browse via Ashburn proxy
+6. Check active sessions report
+7. Browse via Ashburn proxyless
+8. Check active sessions report
+9. Browse via Med1 proxy
+10. Check active sessions report
+11. Browse via Med1 proxyless
+12. Check active sessions report
+13. Browse via Frankfurt proxy
+14. Check active sessions report
+15. Browse via Frankfurt proxyless
+16. Check active sessions report
+17. Browse via Milano proxy
+18. Check active sessions report
+19. Browse via Milano proxyless
+20. Check active sessions report
+
+Prerequisite: Existing configuration (shield\suspicious site block\download)
+
+
+
+
+
+Route53 on QA?
+
+Phase 2
+1. As an existing tenant, change configuration Crystal\Enable Print\Sanitize Download
+2. Browse (proxy\proxyless) from each pop and verify configuration changed
+3. As an existing tenant, change configuration Crystal\Disable Print\Disable Download
+4. Browse (proxy\proxyless) from each pop and verify configuration changed
+
+Phase 3
+New Tenant and all above
+
+
+

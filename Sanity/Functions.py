@@ -530,6 +530,19 @@ def AdminLogin(admin_driver, wait_time, admin_address):
         PressOnObject(admin_driver, wait_time, 'ID', 'login-submit')
         PrintText('Admin login ended')
 ######################################################################
+def TenantAdminLogin(admin_driver, wait_time, tenant_url, tenant_user, tenant_password):
+    PrintText('Tenant Admin login started')
+    time.sleep(5)
+    GoToURL(admin_driver, tenant_url, 0)
+    EnterTextToField(admin_driver, wait_time, 'NAME', 'username', tenant_user)
+    EnterTextToField(admin_driver, wait_time, 'NAME', 'password', tenant_password)
+    PressOnObject(admin_driver, wait_time, 'ID', 'login-submit')
+    time.sleep(5)
+    # input("press Enter to quit")
+    PrintText('Tenant Admin login ended')
+
+
+######################################################################
 def HitEnter():
 
     pyautogui.press('enter')
@@ -607,7 +620,6 @@ def CreateNewCleanMachine(browser_type, browser_path, shield_status, headless_mo
     EnterTextToField(driver, 10, 'NAME', 'j_password', jenkins_password)
     PressOnObject(driver, 10,'NAME', 'Submit')
     time.sleep(5)
-
     PressOnObject(driver, 10, 'XPATH', '//*[@id="tasks"]/div[4]/a[1]', focus='OFF')
     time.sleep(2)
     SelectOptionFromList(driver, 10, 'XPATH', '//*[@id="main-panel"]/form/table/tbody[1]/tr[1]/td[3]/div/select', email, focus='OFF')
