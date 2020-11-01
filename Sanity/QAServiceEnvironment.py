@@ -38,19 +38,21 @@ geo_proxyless = 'https://qa-proxyless.shield-service.net'
 
 
 # QA pops list
-qa_pops = [
+qa_pops_proxy = [
             ashburn_proxy,
-            ashburn_proxyless,
             med1_proxy,
-            med1_proxyless,
             frankfurt_proxy,
-            frankfurt_proxyless,
             milano_proxy,
-            milano_proxyless,
-            geo_proxy,
-            geo_proxyless
+            geo_proxy
            ]
 
+qa_pops_proxyless = [
+            ashburn_proxyless,
+            med1_proxyless,
+            frankfurt_proxyless,
+            milano_proxyless,
+            geo_proxyless
+           ]
 #SAML details
 saml_user = 'qa@adfs2019.local'
 saml_password = 'Ericom123$'

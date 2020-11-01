@@ -529,6 +529,16 @@ def AdminLogin(admin_driver, wait_time, admin_address):
         EnterTextToField(admin_driver, wait_time, 'NAME', 'password', 'ericomshield')
         PressOnObject(admin_driver, wait_time, 'ID', 'login-submit')
         PrintText('Admin login ended')
+
+######################################################################
+def TenantAdminLogin(admin_driver, wait_time, admin_url, user_name, password):
+    PrintText('Cloud Admin login started')
+    time.sleep(5)
+    GoToURL(admin_driver, admin_url, 0)
+    EnterTextToField(admin_driver, wait_time, 'NAME', 'username', user_name)
+    EnterTextToField(admin_driver, wait_time, 'NAME', 'password', password)
+    PressOnObject(admin_driver, wait_time, 'ID', 'login-submit')
+    PrintText('Cloud Admin login ended')
 ######################################################################
 def TenantAdminLogin(admin_driver, wait_time, tenant_url, tenant_user, tenant_password):
     PrintText('Tenant Admin login started')
@@ -584,13 +594,14 @@ def CheckIfPageBlocked(driver, wait_time):
 
 ######################################################################
 def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia.cl - black - Phishing 'Block' Policy -	Suspected
+    time.sleep(5)
     PrintText('Words to search in table are: ' + str(args))
     WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, object_recognizer)))
     table = driver.find_element(By.XPATH, object_recognizer)
     # print('Table ' + str(table))
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
-    # print('Rows ' + str(table_rows))
-    # PrintText('Rows count = : ' + str(len(table_rows)))
+    print('Rows ' + str(table_rows))
+    PrintText('Rows count = : ' + str(len(table_rows)))
     found_words=[]
 
     for arg in args:
@@ -609,6 +620,7 @@ def SearchValuesInTable(driver, wait_time, object_recognizer, *args): # plenavia
     else:
         PrintText('Some\All searched words does not appear in table - step *FAIL*')
         PrintText('Missing searched words are: {}'.format(set(args).difference(set(found_words))))
+        return -1
 
 ######################################################################
 def CreateNewCleanMachine(browser_type, browser_path, shield_status, headless_mode, proxy_address,

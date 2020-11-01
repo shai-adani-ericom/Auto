@@ -226,7 +226,7 @@ class browsing_tests(unittest.TestCase):
         # Close Client browser
         Functions.PrintText('Close Client browser')
         self.client_driver.quit()
-        Functions.PrintText('Shield,Crystal, no print no download ,no Authentication test - *PASS*')
+        Functions.PrintText('Shield,Crystal, enable print enable download ,no Authentication test - *PASS*')
 ###############################################################################################################
         #3 - Set Shield\Stream\ - Browse Chrome\Firefox - proxyless Chrome\Firefox - Done
         # Admin Login
