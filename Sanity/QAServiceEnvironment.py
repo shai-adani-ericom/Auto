@@ -40,15 +40,15 @@ geo_proxyless = 'https://qa-proxyless.shield-service.net'
 # QA pops list
 qa_pops_proxy = [
             ashburn_proxy,
-            med1_proxy,
-            frankfurt_proxy,
-            milano_proxy,
-            geo_proxy
+            med1_proxy
+            # frankfurt_proxy,
+            # milano_proxy,
+            # geo_proxy
            ]
 
 qa_pops_proxyless = [
-            ashburn_proxyless,
             med1_proxyless,
+            ashburn_proxyless,
             frankfurt_proxyless,
             milano_proxyless,
             geo_proxyless

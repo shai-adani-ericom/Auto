@@ -1385,3 +1385,130 @@ def SaveLoadStatistics(
 #     while time.time() < total_run_time:
 #         SimulatePageDown(driver, time_between_scrolls)
 #         SimulatePageUp(driver, time_between_scrolls)
+# ######################################################################
+def service_browse(browser_type, browser_path, proxy_status, headless_mode, pop, wait_time):
+    try:
+        PrintText('Starting browser for pop {}'.format(pop))
+        # Start Chrome browser
+        driver = StartBrowser(browser_type, browser_path, proxy_status, headless_mode,pop)
+        time.sleep(5)
+        # Go to specific web page
+        GoToURL(driver, 'https://www.google.com/', 0)
+        time.sleep(10)
+        # Wait for page Access now page to be loaded and switch to frame
+        SwitchToFrame(driver, wait_time, 'ID', 'crystal-frame-top')
+        # Enter text to field
+        EnterTextToField(driver, wait_time, 'NAME', 'q', 'שי עדני בדיקות תוכנה')
+        time.sleep(5)
+        HitEnter()
+        time.sleep(5)
+        return driver
+    except:
+        PrintText('Starting browser for pop {} fail - step ***FAIL***'.format(pop))
+
+######################################################################
+def service_check_active_session_report(browser_type, browser_path, proxy_status, headless_mode,
+                                              pop, wait_time, tenant_url, tenant_user, tenant_password):
+    try:
+        PrintText('Starting service_check_active_session_report for pop {}'.format(pop))
+        # check active session in tenant report - needs tenants gui
+        # Tenant Admin Login
+        tenant_driver = StartBrowser(browser_type, browser_path, proxy_status, headless_mode, pop)
+        TenantAdminLogin(tenant_driver, wait_time, tenant_url, tenant_user, tenant_password)
+        # Go to Reports page
+        PressOnObject(tenant_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+        time.sleep(5)
+        # Reports - Select Category = Sessions Select Report = Active sessions
+        PrintText('Reports - Select Category = Sessions Select Report = Active sessions')
+        time.sleep(3)
+        SelectOptionFromList(tenant_driver, wait_time, 'NAME', 'selectCategory', 'Sessions')
+        time.sleep(3)
+        SelectOptionFromList(tenant_driver, wait_time, 'NAME', 'selectReport', 'Active Sessions')
+        time.sleep(3)
+        # run
+        PressOnObject(tenant_driver, wait_time, 'XPATH',
+                                '//*[@id="content"]/table/tbody/tr[1]/td[4]/button')
+        time.sleep(5)
+        if 'https://www.google.com'  in tenant_driver.page_source:
+            PrintText('https://www.google.com appears in active sessions reports - test ***PASS***')
+        else:
+            PrintText('https://www.google.com NOT appears in active sessions reports - test ***FAIL***')
+            return -1
+        time.sleep(3)
+        tenant_driver.quit()
+    except:
+        PrintText('Starting service_check_active_session_report for pop {} fail - step ***FAIL***'.format(pop))
+
+######################################################################
+def service_verify_print_enabled_and_download(browser_type, browser_path, proxy_status, headless_mode,
+                                              pop, wait_time, chrome_download_folder):
+    try:
+        PrintText('Starting service_verify_print_enabled_and_download for pop {}'.format(pop))
+        # Open Chrome Browser in Shield\Crystal\sanitize print enable download, print\download
+        PrintText(
+            'Open Chrome Browser in Shield\Crystal yes print sanitize download')
+        # Start Chrome browser
+        driver = StartBrowser(browser_type, browser_path, proxy_status, headless_mode,pop)
+        # Go to specific web page
+        url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
+        # Go to specific web page
+        url = 'https://www.ericom.com/doc/TechnicalReferences/EricomBlazeAdminManual.pdf'
+        GoToURL(driver, url, 0)
+        # Wait for page Access now page to be loaded and switch to frame
+        SwitchToFrame(driver, wait_time, 'ID', 'crystal-frame-top')
+        # Press on download option
+        time.sleep(5)
+        # Go to online PDF file, download and verify it was downloaded
+        VerifyFileDownload(driver, wait_time, 'ID', 'download', chrome_download_folder,
+                                     'EricomBlazeAdminManual.pdf')
+        time.sleep(5)
+        # Verify that Print icon is visible
+        VerifyElementIsVisible(driver, wait_time, 'ID', 'print')
+        # Close Client browser
+        PrintText('Close Client browser')
+        driver.quit()
+        PrintText('Shield,Crystal, enable print enable download ,no Authentication test - *PASS*')
+    except:
+        PrintText('Starting service_verify_print_enabled_and_download for pop {} fail - step ***FAIL***'.format(pop))
+######################################################################
+
+def service_block_suspicious_site(browser_type, browser_path, proxy_status, headless_mode,
+                                              pop, wait_time, tenant_url, tenant_user, tenant_password):
+    try:
+        PrintText('Starting service_block_suspicious_site for pop {}'.format(pop))
+        # #6 - Suspicious sites -  Browse to suspicious site and get blocked message, check for session history report
+        # Open Chrome Browser in Shield\Stream, Go to URL Press on Object
+        PrintText('Open Client Browser and try to browse to suspicious site, verify blocked by shield')
+        # Start Chrome browser
+        driver = StartBrowser(browser_type, browser_path, proxy_status, headless_mode, pop)
+        # Go to specific web page
+        url = 'http://plenavia.cl/cxc/D2017HL/u.php'
+        GoToURL(driver, url, 0)
+        # Check if page was blocked
+        CheckIfPageBlocked(driver, wait_time)
+        time.sleep(3)
+        driver.quit()
+        # Check if report contains blocked activity
+        # Admin Login
+        tenant_admin_driver = StartBrowser(browser_type, browser_path, 'OFF', headless_mode,
+                                                   pop)
+        TenantAdminLogin(tenant_admin_driver, wait_time, tenant_url, tenant_user, tenant_password)
+        # Go to Reports page
+        PressOnObject(tenant_admin_driver, wait_time, 'XPATH', '//*[@id="el_1"]/a/span')
+        # Reports - Select Category = Sessions Select Report = Session History time = Last 15 minutes
+        PrintText('Reports - Select Category = Sessions Select Report = Session History time = Last 15 minutes')
+        SelectOptionFromList(tenant_admin_driver, wait_time, 'NAME', 'selectCategory', 'Sessions')
+        SelectOptionFromList(tenant_admin_driver, wait_time, 'NAME', 'selectReport', 'Session History')
+        SelectOptionFromList(tenant_admin_driver, wait_time, 'NAME', 'selectTime',
+                                       'Last 15 minutes')
+        # Save
+        PressOnObject(tenant_admin_driver, wait_time, 'XPATH',
+                                '//*[@id="content"]/table/tbody/tr[1]/td[4]/button')
+        time.sleep(5)
+        # Search word in report
+        # words = ['plenavia.cl','black',"Phishing 'Block' Policy", 'Suspected']
+        SearchValuesInTable(tenant_admin_driver, wait_time,'//*[@id="content"]/table', 'plenavia.cl','black',"Phishing 'Block' Policy", 'Suspected')
+        tenant_admin_driver.quit()
+    except:
+        PrintText('Starting service_block_suspicious_site for pop {} fail - step ***FAIL***'.format(pop))
+
